@@ -5,260 +5,264 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>电子名片制作器 | Card Maker</title>
   
-  <!-- Google Fonts - 中英文字体（使用国内镜像） -->
+  <!-- 字体：使用 Inter + Noto Sans SC 接近苹果风格 -->
   <link rel="preconnect" href="https://fonts.loli.net" crossorigin>
-  <link href="https://fonts.loli.net/css2?family=Noto+Sans+SC:wght@300;400;500;700&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <link href="https://fonts.loli.net/css2?family=Noto+Sans+SC:wght@300;400;500;600;700&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
   
-  <!-- html2canvas - 用于导出名片为图片（使用国内CDN） -->
+  <!-- html2canvas - 用于导出名片为图片 -->
   <script src="https://cdn.bootcdn.net/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
   
   <!-- 样式文件 -->
   <link rel="stylesheet" href="css/style.css">
 </head>
 <body>
-  <!-- ==================== 顶部标题栏 ==================== -->
-  <header class="header">
-    <div class="header-inner">
-      <div class="header-logo">
-        <span class="header-icon">💼</span>
-        <div>
-          <h1>电子名片制作器</h1>
-          <p>Card Maker - 快速制作专业电子名片</p>
-        </div>
+
+  <!-- ==================== 顶部导航栏（苹果风格毛玻璃） ==================== -->
+  <nav class="nav-bar">
+    <div class="nav-inner">
+      <div class="nav-brand">
+        <span class="nav-icon">💼</span>
+        <span class="nav-title">名片制作器</span>
       </div>
     </div>
-  </header>
+  </nav>
 
-  <!-- ==================== 主内容区域 ==================== -->
-  <main class="main-container">
-    <!-- ========== 左侧：编辑面板 ========== -->
-    <section class="editor-panel">
-      
-      <!-- 步骤1：选择公司 -->
-      <div class="editor-section">
-        <div class="section-header">
-          <span class="step-badge">1</span>
-          <h2>选择公司</h2>
-        </div>
-        <div class="form-group">
-          <select id="companySelect" class="form-select">
-            <option value="">-- 请选择你所在的公司 --</option>
+  <!-- ==================== Hero 区域 ==================== -->
+  <section class="hero">
+    <h1 class="hero-title">制作你的专业名片</h1>
+    <p class="hero-subtitle">选择模板，填写信息，一键导出高清名片图片</p>
+  </section>
+
+  <!-- ==================== 编辑区域 ==================== -->
+  <section class="editor-area">
+    <div class="editor-inner">
+
+      <!-- 第一行：公司选择 + 版式/模板 -->
+      <div class="editor-grid-top">
+        
+        <!-- 公司选择 -->
+        <div class="card-block">
+          <div class="block-label">选择公司</div>
+          <select id="companySelect" class="apple-select">
+            <option value="">请选择你所在的公司</option>
           </select>
+          <div id="companyInfo" class="company-info hidden">
+            <div class="info-item">
+              <span class="info-icon">🏢</span>
+              <span id="companyDisplayName"></span>
+            </div>
+            <div class="info-item">
+              <span class="info-icon">📍</span>
+              <span id="companyDisplayAddress"></span>
+            </div>
+            <div class="info-item">
+              <span class="info-icon">🌐</span>
+              <span id="companyDisplayWebsite"></span>
+            </div>
+          </div>
         </div>
-        <!-- 公司信息预览（选中后显示） -->
-        <div id="companyInfo" class="company-info hidden">
-          <div class="company-info-row">
-            <span class="info-label">🏢</span>
-            <span id="companyDisplayName"></span>
+
+        <!-- 版式 + 模板 -->
+        <div class="card-block">
+          <div class="block-label">版式与模板</div>
+          
+          <!-- 版式选择 -->
+          <div class="layout-row">
+            <label class="layout-chip active" data-layout="horizontal">
+              <input type="radio" name="layout" value="horizontal" checked>
+              <span>横版</span>
+            </label>
+            <label class="layout-chip" data-layout="vertical">
+              <input type="radio" name="layout" value="vertical">
+              <span>竖版</span>
+            </label>
           </div>
-          <div class="company-info-row">
-            <span class="info-label">📍</span>
-            <span id="companyDisplayAddress"></span>
-          </div>
-          <div class="company-info-row">
-            <span class="info-label">🌐</span>
-            <span id="companyDisplayWebsite"></span>
+
+          <!-- 模板选择 -->
+          <div id="templateOptions" class="template-grid">
+            <!-- JS动态生成 -->
           </div>
         </div>
       </div>
 
-      <!-- 步骤2：选择版式和模板 -->
-      <div class="editor-section">
-        <div class="section-header">
-          <span class="step-badge">2</span>
-          <h2>选择版式和模板</h2>
-        </div>
-        
-        <!-- 版式选择 -->
-        <div class="subsection-label">版式</div>
-        <div class="layout-options">
-          <label class="layout-option active" data-layout="horizontal">
-            <input type="radio" name="layout" value="horizontal" checked>
-            <div class="layout-preview layout-preview-h">
-              <div class="layout-lines">
-                <div></div><div></div><div></div>
-              </div>
-            </div>
-            <span>横版</span>
-          </label>
-          <label class="layout-option" data-layout="vertical">
-            <input type="radio" name="layout" value="vertical">
-            <div class="layout-preview layout-preview-v">
-              <div class="layout-lines">
-                <div></div><div></div><div></div>
-              </div>
-            </div>
-            <span>竖版</span>
-          </label>
-        </div>
-
-        <!-- 模板选择 -->
-        <div class="subsection-label" style="margin-top: 16px;">模板风格</div>
-        <div id="templateOptions" class="template-options">
-          <!-- JS动态生成模板选项 -->
-        </div>
-      </div>
-
-      <!-- 步骤3：填写个人信息 -->
-      <div class="editor-section">
-        <div class="section-header">
-          <span class="step-badge">3</span>
-          <h2>填写个人信息</h2>
-        </div>
-        
-        <div class="form-row">
-          <div class="form-group">
-            <label for="nameCN">中文姓名 <span class="required">*</span></label>
-            <input type="text" id="nameCN" class="form-input" placeholder="例：张三">
+      <!-- 第二行：个人信息 -->
+      <div class="card-block card-block-wide">
+        <div class="block-label">个人信息</div>
+        <div class="form-grid">
+          <div class="form-field">
+            <label for="nameCN">中文姓名 <span class="req">*</span></label>
+            <input type="text" id="nameCN" placeholder="张三">
           </div>
-          <div class="form-group">
-            <label for="nameEN">英文姓名 <span class="required">*</span></label>
-            <input type="text" id="nameEN" class="form-input" placeholder="例：San Zhang">
+          <div class="form-field">
+            <label for="nameEN">英文姓名 <span class="req">*</span></label>
+            <input type="text" id="nameEN" placeholder="San Zhang">
           </div>
-        </div>
-
-        <div class="form-row">
-          <div class="form-group">
-            <label for="titleCN">中文职位 <span class="required">*</span></label>
-            <input type="text" id="titleCN" class="form-input" placeholder="例：产品经理">
+          <div class="form-field">
+            <label for="titleCN">中文职位 <span class="req">*</span></label>
+            <input type="text" id="titleCN" placeholder="产品经理">
           </div>
-          <div class="form-group">
-            <label for="titleEN">英文职位 <span class="required">*</span></label>
-            <input type="text" id="titleEN" class="form-input" placeholder="例：Product Manager">
+          <div class="form-field">
+            <label for="titleEN">英文职位 <span class="req">*</span></label>
+            <input type="text" id="titleEN" placeholder="Product Manager">
           </div>
-        </div>
-
-        <div class="form-row">
-          <div class="form-group">
+          <div class="form-field">
             <label for="deptCN">中文部门</label>
-            <input type="text" id="deptCN" class="form-input" placeholder="例：产品部">
+            <input type="text" id="deptCN" placeholder="产品部">
           </div>
-          <div class="form-group">
+          <div class="form-field">
             <label for="deptEN">英文部门</label>
-            <input type="text" id="deptEN" class="form-input" placeholder="例：Product Department">
+            <input type="text" id="deptEN" placeholder="Product Department">
           </div>
-        </div>
-
-        <div class="form-row">
-          <div class="form-group">
-            <label for="mobile">手机号码 <span class="required">*</span></label>
-            <input type="tel" id="mobile" class="form-input" placeholder="例：138-0000-0000">
+          <div class="form-field">
+            <label for="mobile">手机号码 <span class="req">*</span></label>
+            <input type="tel" id="mobile" placeholder="138-0000-0000">
           </div>
-          <div class="form-group">
-            <label for="email">电子邮箱 <span class="required">*</span></label>
-            <input type="email" id="email" class="form-input" placeholder="例：zhangsan@abc.com">
+          <div class="form-field">
+            <label for="email">电子邮箱 <span class="req">*</span></label>
+            <input type="email" id="email" placeholder="zhangsan@abc.com">
           </div>
-        </div>
-
-        <div class="form-row">
-          <div class="form-group">
+          <div class="form-field">
             <label for="wechat">微信号</label>
-            <input type="text" id="wechat" class="form-input" placeholder="例：zhangsan_wx">
+            <input type="text" id="wechat" placeholder="zhangsan_wx">
           </div>
-          <div class="form-group">
+          <div class="form-field">
             <label for="telephone">座机电话</label>
-            <input type="tel" id="telephone" class="form-input" placeholder="例：010-88888888">
+            <input type="tel" id="telephone" placeholder="010-88888888">
           </div>
         </div>
 
         <!-- 头像上传 -->
-        <div class="form-group">
-          <label>上传头像（可选）</label>
-          <div class="avatar-upload">
-            <div id="avatarPreview" class="avatar-preview">
-              <span class="avatar-placeholder">👤</span>
-            </div>
-            <div class="avatar-actions">
-              <label for="avatarInput" class="btn btn-outline btn-sm">选择图片</label>
-              <input type="file" id="avatarInput" accept="image/*" style="display:none">
-              <button type="button" id="avatarClear" class="btn btn-text btn-sm hidden">移除头像</button>
-            </div>
+        <div class="avatar-row">
+          <div id="avatarPreview" class="avatar-circle">
+            <span class="avatar-placeholder">👤</span>
+          </div>
+          <div class="avatar-info">
+            <label for="avatarInput" class="apple-btn apple-btn-sm apple-btn-secondary">选择头像</label>
+            <input type="file" id="avatarInput" accept="image/*" style="display:none">
+            <button type="button" id="avatarClear" class="apple-btn-text hidden">移除</button>
+            <span class="avatar-hint">可选，建议正方形照片</span>
           </div>
         </div>
       </div>
 
-      <!-- 步骤4：导出 -->
-      <div class="editor-section">
-        <div class="section-header">
-          <span class="step-badge">4</span>
-          <h2>导出名片</h2>
-        </div>
-        <div class="export-buttons">
-          <button type="button" id="exportAll" class="btn btn-accent btn-lg">
-            📥 一键导出全部名片
-          </button>
-          <div class="export-row">
-            <button type="button" id="exportCN" class="btn btn-primary btn-md">
-              导出中文名片
-            </button>
-            <button type="button" id="exportEN" class="btn btn-primary btn-md">
-              导出英文名片
-            </button>
-          </div>
-        </div>
-      </div>
-    </section>
+    </div>
+  </section>
 
-    <!-- ========== 右侧：预览面板 ========== -->
-    <section class="preview-panel">
-      <div class="preview-header">
-        <h2>👁️ 名片预览</h2>
-        <span class="preview-hint">填写信息后实时更新</span>
-      </div>
+  <!-- ==================== 名片预览区域（页面底部） ==================== -->
+  <section class="preview-area">
+    <div class="preview-inner">
+      <h2 class="section-title">名片预览</h2>
+      <p class="section-desc">填写信息后实时更新，所见即所得</p>
 
-      <!-- 中文名片预览 -->
-      <div class="card-section">
-        <div class="card-section-label">🇨🇳 中文面</div>
-        <div class="preview-wrapper">
-          <div id="cardPreviewCN" class="card-preview-container active">
-            <div id="cardCN" class="business-card horizontal">
-              <div class="card-content">
-                <!-- 名片左侧/上方区域 -->
-                <div class="card-logo-area">
-                  <div class="card-logo" id="cardLogoCN">
-                    <span class="logo-placeholder">LOGO</span>
-                  </div>
-                  <div class="card-company-name" id="cardCompanyNameCN">公司名称</div>
-                </div>
-                <!-- 名片主要信息区域 -->
-                <div class="card-info-area">
-                  <div class="card-name-row">
-                    <div class="card-avatar" id="cardAvatarCN">
-                      <!-- 头像由JS动态填充 -->
+      <div class="cards-showcase">
+        <!-- 中文名片 -->
+        <div class="showcase-item">
+          <div class="showcase-label">中文面</div>
+          <div class="showcase-card-wrap">
+            <div id="cardPreviewCN" class="card-preview-container active">
+              <div id="cardCN" class="business-card horizontal">
+                <div class="card-content">
+                  <div class="card-logo-area">
+                    <div class="card-logo" id="cardLogoCN">
+                      <span class="logo-placeholder">LOGO</span>
                     </div>
-                    <div class="card-name-block">
-                      <div class="card-person-name" id="cardNameCN">您的姓名</div>
-                      <div class="card-person-title" id="cardTitleCN">
-                        <span class="card-title-text" id="cardTitleTextCN">职位名称</span>
-                        <span class="card-dept-text" id="cardDeptTextCN"></span>
+                    <div class="card-company-name" id="cardCompanyNameCN">公司名称</div>
+                  </div>
+                  <div class="card-info-area">
+                    <div class="card-name-row">
+                      <div class="card-avatar" id="cardAvatarCN"></div>
+                      <div class="card-name-block">
+                        <div class="card-person-name" id="cardNameCN">您的姓名</div>
+                        <div class="card-person-title" id="cardTitleCN">
+                          <span class="card-title-text" id="cardTitleTextCN">职位名称</span>
+                          <span class="card-dept-text" id="cardDeptTextCN"></span>
+                        </div>
+                      </div>
+                    </div>
+                    <div class="card-divider"></div>
+                    <div class="card-contact-list" id="cardContactsCN">
+                      <div class="card-contact-item">
+                        <span class="contact-icon">📱</span>
+                        <span class="contact-text" id="cardMobileCN">手机号码</span>
+                      </div>
+                      <div class="card-contact-item">
+                        <span class="contact-icon">✉️</span>
+                        <span class="contact-text" id="cardEmailCN">电子邮箱</span>
+                      </div>
+                      <div class="card-contact-item card-contact-wechat hidden" id="cardWechatRowCN">
+                        <span class="contact-icon">💬</span>
+                        <span class="contact-text" id="cardWechatCN"></span>
+                      </div>
+                      <div class="card-contact-item card-contact-tel hidden" id="cardTelRowCN">
+                        <span class="contact-icon">📞</span>
+                        <span class="contact-text" id="cardTelCN"></span>
+                      </div>
+                      <div class="card-contact-item card-contact-website hidden" id="cardWebsiteRowCN">
+                        <span class="contact-icon">🌐</span>
+                        <span class="contact-text" id="cardWebsiteCN"></span>
+                      </div>
+                      <div class="card-contact-item card-contact-address">
+                        <span class="contact-icon">📍</span>
+                        <span class="contact-text" id="cardAddressCN">公司地址</span>
                       </div>
                     </div>
                   </div>
-                  <div class="card-divider"></div>
-                  <div class="card-contact-list" id="cardContactsCN">
-                    <div class="card-contact-item">
-                      <span class="contact-icon">📱</span>
-                      <span class="contact-text" id="cardMobileCN">手机号码</span>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- 英文名片 -->
+        <div class="showcase-item">
+          <div class="showcase-label">英文面</div>
+          <div class="showcase-card-wrap">
+            <div id="cardPreviewEN" class="card-preview-container active">
+              <div id="cardEN" class="business-card horizontal">
+                <div class="card-content">
+                  <div class="card-logo-area">
+                    <div class="card-logo" id="cardLogoEN">
+                      <span class="logo-placeholder">LOGO</span>
                     </div>
-                    <div class="card-contact-item">
-                      <span class="contact-icon">✉️</span>
-                      <span class="contact-text" id="cardEmailCN">电子邮箱</span>
+                    <div class="card-company-name" id="cardCompanyNameEN">Company Name</div>
+                  </div>
+                  <div class="card-info-area">
+                    <div class="card-name-row">
+                      <div class="card-avatar" id="cardAvatarEN"></div>
+                      <div class="card-name-block">
+                        <div class="card-person-name" id="cardNameEN">Your Name</div>
+                        <div class="card-person-title" id="cardTitleEN">
+                          <span class="card-title-text" id="cardTitleTextEN">Job Title</span>
+                          <span class="card-dept-text" id="cardDeptTextEN"></span>
+                        </div>
+                      </div>
                     </div>
-                    <div class="card-contact-item card-contact-wechat hidden" id="cardWechatRowCN">
-                      <span class="contact-icon">💬</span>
-                      <span class="contact-text" id="cardWechatCN"></span>
-                    </div>
-                    <div class="card-contact-item card-contact-tel hidden" id="cardTelRowCN">
-                      <span class="contact-icon">📞</span>
-                      <span class="contact-text" id="cardTelCN"></span>
-                    </div>
-                    <div class="card-contact-item card-contact-website hidden" id="cardWebsiteRowCN">
-                      <span class="contact-icon">🌐</span>
-                      <span class="contact-text" id="cardWebsiteCN"></span>
-                    </div>
-                    <div class="card-contact-item card-contact-address">
-                      <span class="contact-icon">📍</span>
-                      <span class="contact-text" id="cardAddressCN">公司地址</span>
+                    <div class="card-divider"></div>
+                    <div class="card-contact-list" id="cardContactsEN">
+                      <div class="card-contact-item">
+                        <span class="contact-icon">📱</span>
+                        <span class="contact-text" id="cardMobileEN">Mobile Number</span>
+                      </div>
+                      <div class="card-contact-item">
+                        <span class="contact-icon">✉️</span>
+                        <span class="contact-text" id="cardEmailEN">Email Address</span>
+                      </div>
+                      <div class="card-contact-item card-contact-wechat hidden" id="cardWechatRowEN">
+                        <span class="contact-icon">💬</span>
+                        <span class="contact-text" id="cardWechatEN"></span>
+                      </div>
+                      <div class="card-contact-item card-contact-tel hidden" id="cardTelRowEN">
+                        <span class="contact-icon">📞</span>
+                        <span class="contact-text" id="cardTelEN"></span>
+                      </div>
+                      <div class="card-contact-item card-contact-website hidden" id="cardWebsiteRowEN">
+                        <span class="contact-icon">🌐</span>
+                        <span class="contact-text" id="cardWebsiteEN"></span>
+                      </div>
+                      <div class="card-contact-item card-contact-address">
+                        <span class="contact-icon">📍</span>
+                        <span class="contact-text" id="cardAddressEN">Company Address</span>
+                      </div>
                     </div>
                   </div>
                 </div>
@@ -268,105 +272,56 @@
         </div>
       </div>
 
-      <!-- 英文名片预览 -->
-      <div class="card-section">
-        <div class="card-section-label">🇬🇧 英文面</div>
-        <div class="preview-wrapper">
-          <div id="cardPreviewEN" class="card-preview-container active">
-            <div id="cardEN" class="business-card horizontal">
-              <div class="card-content">
-                <div class="card-logo-area">
-                  <div class="card-logo" id="cardLogoEN">
-                    <span class="logo-placeholder">LOGO</span>
-                  </div>
-                  <div class="card-company-name" id="cardCompanyNameEN">Company Name</div>
-                </div>
-                <div class="card-info-area">
-                  <div class="card-name-row">
-                    <div class="card-avatar" id="cardAvatarEN">
-                      <!-- 头像由JS动态填充 -->
-                    </div>
-                    <div class="card-name-block">
-                      <div class="card-person-name" id="cardNameEN">Your Name</div>
-                      <div class="card-person-title" id="cardTitleEN">
-                        <span class="card-title-text" id="cardTitleTextEN">Job Title</span>
-                        <span class="card-dept-text" id="cardDeptTextEN"></span>
-                      </div>
-                    </div>
-                  </div>
-                  <div class="card-divider"></div>
-                  <div class="card-contact-list" id="cardContactsEN">
-                    <div class="card-contact-item">
-                      <span class="contact-icon">📱</span>
-                      <span class="contact-text" id="cardMobileEN">Mobile Number</span>
-                    </div>
-                    <div class="card-contact-item">
-                      <span class="contact-icon">✉️</span>
-                      <span class="contact-text" id="cardEmailEN">Email Address</span>
-                    </div>
-                    <div class="card-contact-item card-contact-wechat hidden" id="cardWechatRowEN">
-                      <span class="contact-icon">💬</span>
-                      <span class="contact-text" id="cardWechatEN"></span>
-                    </div>
-                    <div class="card-contact-item card-contact-tel hidden" id="cardTelRowEN">
-                      <span class="contact-icon">📞</span>
-                      <span class="contact-text" id="cardTelEN"></span>
-                    </div>
-                    <div class="card-contact-item card-contact-website hidden" id="cardWebsiteRowEN">
-                      <span class="contact-icon">🌐</span>
-                      <span class="contact-text" id="cardWebsiteEN"></span>
-                    </div>
-                    <div class="card-contact-item card-contact-address">
-                      <span class="contact-icon">📍</span>
-                      <span class="contact-text" id="cardAddressEN">Company Address</span>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
+      <!-- 导出按钮 -->
+      <div class="export-bar">
+        <button type="button" id="exportAll" class="apple-btn apple-btn-primary apple-btn-lg">
+          一键导出全部名片
+        </button>
+        <div class="export-sub">
+          <button type="button" id="exportCN" class="apple-btn apple-btn-secondary">导出中文名片</button>
+          <button type="button" id="exportEN" class="apple-btn apple-btn-secondary">导出英文名片</button>
         </div>
       </div>
-    </section>
-  </main>
+    </div>
+  </section>
 
   <!-- ==================== 底部 ==================== -->
-  <footer class="footer">
-    <p>© 2026 电子名片制作器 Card Maker | 内部使用工具</p>
+  <footer class="site-footer">
+    <p>© 2026 名片制作器 Card Maker</p>
   </footer>
 
   <!-- ==================== 头像裁剪弹窗 ==================== -->
   <div id="avatarCropModal" class="crop-modal hidden">
     <div class="crop-modal-overlay"></div>
     <div class="crop-modal-dialog">
-      <h3>📷 调整头像位置</h3>
-      <p class="crop-hint">拖动照片让人脸居中，滑块可调整大小</p>
+      <h3>调整头像</h3>
+      <p class="crop-hint">拖动照片让人脸居中，滑块调整大小</p>
       <div class="crop-area">
         <div class="crop-circle" id="cropCircle">
           <img id="cropImage" src="" alt="裁剪预览" draggable="false">
         </div>
       </div>
       <div class="crop-zoom">
-        <span class="crop-zoom-label">🔍−</span>
+        <span class="crop-zoom-label">−</span>
         <input type="range" id="cropZoom" min="100" max="300" value="100">
-        <span class="crop-zoom-label">+🔍</span>
+        <span class="crop-zoom-label">+</span>
       </div>
       <div class="crop-actions">
-        <button type="button" id="cropCancel" class="btn btn-outline">取消</button>
-        <button type="button" id="cropConfirm" class="btn btn-primary">✓ 确定使用</button>
+        <button type="button" id="cropCancel" class="apple-btn apple-btn-secondary">取消</button>
+        <button type="button" id="cropConfirm" class="apple-btn apple-btn-primary">确定</button>
       </div>
     </div>
   </div>
 
-  <!-- ==================== 导出中的加载提示 ==================== -->
+  <!-- ==================== 导出加载 ==================== -->
   <div id="exportLoading" class="export-loading hidden">
     <div class="loading-content">
       <div class="loading-spinner"></div>
-      <p>正在导出名片，请稍候...</p>
+      <p>正在导出名片…</p>
     </div>
   </div>
 
-  <!-- JavaScript 文件 -->
+  <!-- JavaScript -->
   <script src="js/companies.js"></script>
   <script src="js/templates.js"></script>
   <script src="js/export.js"></script>
