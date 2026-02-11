@@ -99,19 +99,47 @@
           </div>
           <div class="form-field">
             <label for="titleCN">中文职位 <span class="req">*</span></label>
-            <input type="text" id="titleCN" placeholder="产品经理">
+            <input type="text" id="titleCN" list="titleCNList" placeholder="选择或输入职位" autocomplete="off">
+            <datalist id="titleCNList">
+              <option value="总经理">
+              <option value="副总经理">
+              <option value="销售经理">
+              <option value="市场经理">
+              <option value="产品线经理">
+            </datalist>
           </div>
           <div class="form-field">
             <label for="titleEN">英文职位 <span class="req">*</span></label>
-            <input type="text" id="titleEN" placeholder="Product Manager">
+            <input type="text" id="titleEN" list="titleENList" placeholder="选择或输入职位" autocomplete="off">
+            <datalist id="titleENList">
+              <option value="General Manager">
+              <option value="Deputy General Manager">
+              <option value="Sales Manager">
+              <option value="Marketing Manager">
+              <option value="Product Line Manager">
+            </datalist>
           </div>
           <div class="form-field">
             <label for="deptCN">中文部门</label>
-            <input type="text" id="deptCN" placeholder="产品部">
+            <input type="text" id="deptCN" list="deptCNList" placeholder="选择或输入部门" autocomplete="off">
+            <datalist id="deptCNList">
+              <option value="销售部">
+              <option value="市场部">
+              <option value="物流部">
+              <option value="财务部">
+              <option value="运营服务部">
+            </datalist>
           </div>
           <div class="form-field">
             <label for="deptEN">英文部门</label>
-            <input type="text" id="deptEN" placeholder="Product Department">
+            <input type="text" id="deptEN" list="deptENList" placeholder="选择或输入部门" autocomplete="off">
+            <datalist id="deptENList">
+              <option value="Sales Department">
+              <option value="Marketing Department">
+              <option value="Logistics Department">
+              <option value="Finance Department">
+              <option value="Operations & Service Department">
+            </datalist>
           </div>
           <div class="form-field">
             <label for="mobile">手机号码 <span class="req">*</span></label>

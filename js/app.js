@@ -145,6 +145,23 @@ function initLayoutOptions() {
   });
 }
 
+// ==================== 预设中英文对照表 ====================
+var PRESET_TITLES = {
+  "总经理": "General Manager",
+  "副总经理": "Deputy General Manager",
+  "销售经理": "Sales Manager",
+  "市场经理": "Marketing Manager",
+  "产品线经理": "Product Line Manager"
+};
+
+var PRESET_DEPTS = {
+  "销售部": "Sales Department",
+  "市场部": "Marketing Department",
+  "物流部": "Logistics Department",
+  "财务部": "Finance Department",
+  "运营服务部": "Operations & Service Department"
+};
+
 // ==================== 表单监听 ====================
 function initFormListeners() {
   var fields = [
@@ -161,6 +178,30 @@ function initFormListeners() {
       });
     }
   });
+
+  // 中文职位 → 自动填英文职位
+  var titleCNEl = document.getElementById("titleCN");
+  if (titleCNEl) {
+    titleCNEl.addEventListener("input", function() {
+      var val = this.value.trim();
+      if (PRESET_TITLES[val]) {
+        document.getElementById("titleEN").value = PRESET_TITLES[val];
+        console.log("[自动翻译] 职位:", val, "→", PRESET_TITLES[val]);
+      }
+    });
+  }
+
+  // 中文部门 → 自动填英文部门
+  var deptCNEl = document.getElementById("deptCN");
+  if (deptCNEl) {
+    deptCNEl.addEventListener("input", function() {
+      var val = this.value.trim();
+      if (PRESET_DEPTS[val]) {
+        document.getElementById("deptEN").value = PRESET_DEPTS[val];
+        console.log("[自动翻译] 部门:", val, "→", PRESET_DEPTS[val]);
+      }
+    });
+  }
 }
 
 // ==================== 头像上传 ====================
