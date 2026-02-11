@@ -4,11 +4,23 @@
 
 ---
 
+## 🌐 在线访问地址
+
+| 平台 | 网址 | 适用区域 |
+|------|------|---------|
+| **Cloudflare**（推荐）| https://card.jbdmsxzgp8.workers.dev/ | 🇨🇳 国内外均可 |
+| **Vercel** | https://card-eight-fawn.vercel.app/ | 🌍 国外为主 |
+| **GitHub Pages** | https://fbzyf.github.io/card/ | 🌍 国外为主 |
+
+> 💡 **国内同事请使用 Cloudflare 的链接**
+
+---
+
 ## 🚀 快速开始
 
 ### 员工使用方法
 
-1. 打开网页（管理员提供的网址）
+1. 打开网页（上面表格中的 Cloudflare 网址）
 2. **选择公司** → 从下拉列表选择你所在的公司
 3. **选择版式** → 横版或竖版
 4. **选择模板** → 5种精美模板任你选
@@ -60,19 +72,23 @@
 
 ### 如何部署到网上
 
-**方法一：GitHub Pages（推荐，免费）**
-1. 创建 GitHub 账号
-2. 新建仓库，将所有文件上传
-3. 进入仓库 Settings → Pages → 选择 main 分支 → Save
-4. 等待几分钟，获得网址：`https://你的用户名.github.io/card/`
+本项目已部署到以下三个平台，修改代码推送到 GitHub 后会自动更新：
 
-**方法二：Vercel/Netlify（免费）**
-1. 注册 Vercel 或 Netlify
-2. 导入 GitHub 仓库
-3. 自动部署，获得网址
+**平台一：Cloudflare Pages（推荐，国内可访问，免费）**
+- 网址：https://card.jbdmsxzgp8.workers.dev/
+- 推送 GitHub 后自动部署
 
-**方法三：任何Web服务器**
-- 直接将整个文件夹放到任何Web服务器即可
+**平台二：Vercel（免费）**
+- 网址：https://card-eight-fawn.vercel.app/
+- 推送 GitHub 后自动部署
+
+**平台三：GitHub Pages（免费，国内不可用）**
+- 网址：https://fbzyf.github.io/card/
+- 推送 GitHub 后自动部署
+
+**代码仓库：**
+- GitHub：https://github.com/fbzyf/card
+- Gitee（国内镜像）：https://gitee.com/linpozhu/card
 
 ---
 
