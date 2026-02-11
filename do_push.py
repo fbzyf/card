@@ -2,10 +2,9 @@
 import subprocess, os
 os.chdir(r'D:\Code\card')
 
-subprocess.run(['git', 'rm', 'do_push.py'], capture_output=True)
 subprocess.run(['git', 'add', '-A'])
 
-msg = '清理临时文件'
+msg = '优化国内访问：替换CDN为国内源，添加本地服务器启动脚本'
 with open('commit_msg.txt', 'wb') as f:
     f.write(msg.encode('utf-8'))
 
