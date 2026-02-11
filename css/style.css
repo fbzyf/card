@@ -1007,6 +1007,140 @@ body {
 }
 
 /* ============================================
+   头像裁剪弹窗
+   ============================================ */
+
+/* 弹窗容器（全屏遮罩） */
+.crop-modal {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  z-index: 10000;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* 半透明背景遮罩 */
+.crop-modal-overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(0, 0, 0, 0.6);
+}
+
+/* 弹窗对话框 */
+.crop-modal-dialog {
+  position: relative;
+  background: white;
+  border-radius: var(--radius);
+  padding: 28px;
+  box-shadow: var(--shadow-lg);
+  text-align: center;
+  max-width: 360px;
+  width: 90%;
+  animation: cropModalIn 0.25s ease;
+}
+
+@keyframes cropModalIn {
+  from {
+    opacity: 0;
+    transform: scale(0.9) translateY(10px);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1) translateY(0);
+  }
+}
+
+.crop-modal-dialog h3 {
+  font-size: 18px;
+  font-weight: 600;
+  margin-bottom: 4px;
+  color: var(--text);
+}
+
+/* 提示文字 */
+.crop-hint {
+  font-size: 13px;
+  color: var(--text-secondary);
+  margin-bottom: 20px;
+}
+
+/* 裁剪预览区域 */
+.crop-area {
+  display: flex;
+  justify-content: center;
+  margin-bottom: 16px;
+}
+
+/* 圆形裁剪框 */
+.crop-circle {
+  width: 200px;
+  height: 200px;
+  border-radius: 50%;
+  overflow: hidden;
+  position: relative;
+  border: 3px solid var(--primary);
+  background: #f0f0f0;
+  cursor: grab;
+  touch-action: none;
+}
+
+.crop-circle:active {
+  cursor: grabbing;
+}
+
+/* 裁剪框里的图片 */
+.crop-circle img {
+  position: absolute;
+  left: 0;
+  top: 0;
+  pointer-events: none;
+  user-select: none;
+  -webkit-user-drag: none;
+}
+
+/* 缩放控制栏 */
+.crop-zoom {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-bottom: 20px;
+  justify-content: center;
+  padding: 0 10px;
+}
+
+.crop-zoom-label {
+  font-size: 12px;
+  color: var(--text-secondary);
+  white-space: nowrap;
+  flex-shrink: 0;
+}
+
+.crop-zoom input[type="range"] {
+  flex: 1;
+  max-width: 180px;
+  accent-color: var(--primary);
+  height: 6px;
+}
+
+/* 底部按钮区 */
+.crop-actions {
+  display: flex;
+  gap: 10px;
+  justify-content: center;
+}
+
+.crop-actions .btn {
+  min-width: 100px;
+}
+
+/* ============================================
    加载提示
    ============================================ */
 .export-loading {

@@ -241,10 +241,10 @@ function initFormListeners() {
 // ==================== 头像上传 ====================
 /**
  * 初始化头像上传功能
+ * 上传后会弹出裁剪窗口，让用户拖动和缩放照片使人脸居中
  */
 function initAvatarUpload() {
   const input = document.getElementById("avatarInput");
-  const preview = document.getElementById("avatarPreview");
   const clearBtn = document.getElementById("avatarClear");
 
   input.addEventListener("change", function(e) {
@@ -263,19 +263,11 @@ function initAvatarUpload() {
       return;
     }
 
-    // 读取并预览
-    const reader = new FileReader();
+    // 读取文件后打开裁剪弹窗
+    var reader = new FileReader();
     reader.onload = function(event) {
-      AppState.avatarDataUrl = event.target.result;
-      
-      // 更新头像预览
-      preview.innerHTML = '<img src="' + event.target.result + '" alt="头像">';
-      clearBtn.classList.remove("hidden");
-      
-      // 更新名片预览
-      updateCardPreview();
-      
-      console.log("[头像上传] 成功");
+      showCropModal(event.target.result);
+      console.log("[头像上传] 打开裁剪窗口");
     };
     reader.readAsDataURL(file);
   });
@@ -283,10 +275,260 @@ function initAvatarUpload() {
   // 移除头像
   clearBtn.addEventListener("click", function() {
     AppState.avatarDataUrl = null;
-    preview.innerHTML = '<span class="avatar-placeholder">👤</span>';
+    document.getElementById("avatarPreview").innerHTML = '<span class="avatar-placeholder">👤</span>';
     clearBtn.classList.add("hidden");
     input.value = "";
     updateCardPreview();
+  });
+
+  // 初始化裁剪弹窗的交互
+  initCropModal();
+}
+
+// ==================== 头像裁剪功能 ====================
+
+/**
+ * 裁剪弹窗的状态管理
+ */
+var CropState = {
+  image: null,           // 原始 Image 对象
+  baseScale: 1,          // 基础缩放（让图片覆盖圆框）
+  zoom: 1,               // 用户缩放倍数（1~3）
+  offsetX: 0,            // 图片水平偏移（像素）
+  offsetY: 0,            // 图片垂直偏移（像素）
+  isDragging: false,     // 是否正在拖动
+  dragStartX: 0,         // 拖动起始鼠标X
+  dragStartY: 0,         // 拖动起始鼠标Y
+  dragStartOffsetX: 0,   // 拖动起始图片偏移X
+  dragStartOffsetY: 0    // 拖动起始图片偏移Y
+};
+
+/** 圆形裁剪框的显示尺寸（像素） */
+var CROP_CIRCLE_SIZE = 200;
+
+/**
+ * 打开头像裁剪弹窗
+ * @param {string} dataUrl - 图片的 DataURL
+ */
+function showCropModal(dataUrl) {
+  var modal = document.getElementById("avatarCropModal");
+  var cropImg = document.getElementById("cropImage");
+
+  // 加载图片获取原始尺寸
+  var tempImg = new Image();
+  tempImg.onload = function() {
+    CropState.image = tempImg;
+
+    // 计算基础缩放：让图片完全覆盖圆框（cover模式）
+    CropState.baseScale = Math.max(
+      CROP_CIRCLE_SIZE / tempImg.naturalWidth,
+      CROP_CIRCLE_SIZE / tempImg.naturalHeight
+    );
+
+    // 重置缩放
+    CropState.zoom = 1;
+
+    // 居中显示
+    var dispW = tempImg.naturalWidth * CropState.baseScale;
+    var dispH = tempImg.naturalHeight * CropState.baseScale;
+    CropState.offsetX = (CROP_CIRCLE_SIZE - dispW) / 2;
+    CropState.offsetY = (CROP_CIRCLE_SIZE - dispH) / 2;
+
+    // 设置裁剪图片
+    cropImg.src = dataUrl;
+
+    // 应用变换
+    applyCropTransform();
+
+    // 重置缩放滑块
+    document.getElementById("cropZoom").value = 100;
+
+    // 显示弹窗
+    modal.classList.remove("hidden");
+
+    console.log("[裁剪弹窗] 打开，图片尺寸:", tempImg.naturalWidth, "x", tempImg.naturalHeight);
+  };
+  tempImg.src = dataUrl;
+}
+
+/**
+ * 将当前裁剪状态应用到预览图片
+ */
+function applyCropTransform() {
+  var cropImg = document.getElementById("cropImage");
+  var totalScale = CropState.baseScale * CropState.zoom;
+  var dispW = CropState.image.naturalWidth * totalScale;
+  var dispH = CropState.image.naturalHeight * totalScale;
+
+  cropImg.style.width = dispW + "px";
+  cropImg.style.height = dispH + "px";
+  cropImg.style.left = CropState.offsetX + "px";
+  cropImg.style.top = CropState.offsetY + "px";
+}
+
+/**
+ * 限制图片偏移量，确保图片始终覆盖圆框（不留空白）
+ */
+function clampCropOffset() {
+  var totalScale = CropState.baseScale * CropState.zoom;
+  var dispW = CropState.image.naturalWidth * totalScale;
+  var dispH = CropState.image.naturalHeight * totalScale;
+
+  // 图片左边不能超过圆框左边，右边不能小于圆框右边
+  CropState.offsetX = Math.min(0, Math.max(CROP_CIRCLE_SIZE - dispW, CropState.offsetX));
+  CropState.offsetY = Math.min(0, Math.max(CROP_CIRCLE_SIZE - dispH, CropState.offsetY));
+}
+
+/**
+ * 裁剪图片并导出为 DataURL
+ * 将圆框中可见的部分裁剪为正方形图片
+ * @returns {string} 裁剪后的图片 DataURL
+ */
+function cropAndExport() {
+  var outputSize = 400; // 输出 400x400 像素，保证清晰度
+  var totalScale = CropState.baseScale * CropState.zoom;
+  var invScale = 1 / totalScale;
+
+  // 计算原图中对应圆框可见区域的矩形
+  var sx = -CropState.offsetX * invScale;
+  var sy = -CropState.offsetY * invScale;
+  var sSize = CROP_CIRCLE_SIZE * invScale;
+
+  // 用 Canvas 裁剪
+  var canvas = document.createElement("canvas");
+  canvas.width = outputSize;
+  canvas.height = outputSize;
+  var ctx = canvas.getContext("2d");
+
+  ctx.drawImage(CropState.image, sx, sy, sSize, sSize, 0, 0, outputSize, outputSize);
+
+  console.log("[裁剪导出] 从原图裁剪区域:", Math.round(sx), Math.round(sy), Math.round(sSize), "→ 输出", outputSize, "x", outputSize);
+
+  return canvas.toDataURL("image/jpeg", 0.92);
+}
+
+/**
+ * 初始化裁剪弹窗的所有交互事件
+ * 包括：拖拽移动、缩放滑块、鼠标滚轮缩放、确认/取消按钮
+ */
+function initCropModal() {
+  var circle = document.getElementById("cropCircle");
+  var zoomSlider = document.getElementById("cropZoom");
+  var confirmBtn = document.getElementById("cropConfirm");
+  var cancelBtn = document.getElementById("cropCancel");
+  var modal = document.getElementById("avatarCropModal");
+  var overlay = modal.querySelector(".crop-modal-overlay");
+
+  // ---- 鼠标拖拽 ----
+  circle.addEventListener("mousedown", function(e) {
+    e.preventDefault();
+    CropState.isDragging = true;
+    CropState.dragStartX = e.clientX;
+    CropState.dragStartY = e.clientY;
+    CropState.dragStartOffsetX = CropState.offsetX;
+    CropState.dragStartOffsetY = CropState.offsetY;
+  });
+
+  document.addEventListener("mousemove", function(e) {
+    if (!CropState.isDragging) return;
+    var dx = e.clientX - CropState.dragStartX;
+    var dy = e.clientY - CropState.dragStartY;
+    CropState.offsetX = CropState.dragStartOffsetX + dx;
+    CropState.offsetY = CropState.dragStartOffsetY + dy;
+    clampCropOffset();
+    applyCropTransform();
+  });
+
+  document.addEventListener("mouseup", function() {
+    CropState.isDragging = false;
+  });
+
+  // ---- 触屏拖拽（手机端支持） ----
+  circle.addEventListener("touchstart", function(e) {
+    if (e.touches.length === 1) {
+      e.preventDefault();
+      CropState.isDragging = true;
+      CropState.dragStartX = e.touches[0].clientX;
+      CropState.dragStartY = e.touches[0].clientY;
+      CropState.dragStartOffsetX = CropState.offsetX;
+      CropState.dragStartOffsetY = CropState.offsetY;
+    }
+  }, { passive: false });
+
+  document.addEventListener("touchmove", function(e) {
+    if (!CropState.isDragging) return;
+    if (e.touches.length === 1) {
+      var dx = e.touches[0].clientX - CropState.dragStartX;
+      var dy = e.touches[0].clientY - CropState.dragStartY;
+      CropState.offsetX = CropState.dragStartOffsetX + dx;
+      CropState.offsetY = CropState.dragStartOffsetY + dy;
+      clampCropOffset();
+      applyCropTransform();
+    }
+  }, { passive: false });
+
+  document.addEventListener("touchend", function() {
+    CropState.isDragging = false;
+  });
+
+  // ---- 缩放滑块 ----
+  zoomSlider.addEventListener("input", function() {
+    var newZoom = parseInt(this.value) / 100;
+    var oldZoom = CropState.zoom;
+
+    // 以圆框中心为基准点缩放（缩放时保持中心不变）
+    var ratio = newZoom / oldZoom;
+    var centerX = CROP_CIRCLE_SIZE / 2;
+    var centerY = CROP_CIRCLE_SIZE / 2;
+    CropState.offsetX = CropState.offsetX * ratio + centerX * (1 - ratio);
+    CropState.offsetY = CropState.offsetY * ratio + centerY * (1 - ratio);
+
+    CropState.zoom = newZoom;
+    clampCropOffset();
+    applyCropTransform();
+  });
+
+  // ---- 鼠标滚轮缩放 ----
+  circle.addEventListener("wheel", function(e) {
+    e.preventDefault();
+    var delta = e.deltaY > 0 ? -5 : 5; // 向下滚=缩小，向上滚=放大
+    var newVal = Math.min(300, Math.max(100, parseInt(zoomSlider.value) + delta));
+    zoomSlider.value = newVal;
+    // 触发 input 事件来执行缩放逻辑
+    zoomSlider.dispatchEvent(new Event("input"));
+  }, { passive: false });
+
+  // ---- 确认按钮 ----
+  confirmBtn.addEventListener("click", function() {
+    // 裁剪并导出
+    var croppedUrl = cropAndExport();
+    AppState.avatarDataUrl = croppedUrl;
+
+    // 更新编辑区的头像预览
+    var preview = document.getElementById("avatarPreview");
+    preview.innerHTML = '<img src="' + croppedUrl + '" alt="头像">';
+    document.getElementById("avatarClear").classList.remove("hidden");
+
+    // 更新名片预览
+    updateCardPreview();
+
+    // 关闭弹窗
+    modal.classList.add("hidden");
+
+    console.log("[头像裁剪] 确认使用");
+  });
+
+  // ---- 取消按钮 ----
+  cancelBtn.addEventListener("click", function() {
+    modal.classList.add("hidden");
+    // 重置文件输入
+    document.getElementById("avatarInput").value = "";
+    console.log("[头像裁剪] 取消");
+  });
+
+  // ---- 点击遮罩关闭 ----
+  overlay.addEventListener("click", function() {
+    cancelBtn.click();
   });
 }
 

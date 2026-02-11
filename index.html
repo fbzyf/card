@@ -331,6 +331,29 @@
     <p>© 2026 电子名片制作器 Card Maker | 内部使用工具</p>
   </footer>
 
+  <!-- ==================== 头像裁剪弹窗 ==================== -->
+  <div id="avatarCropModal" class="crop-modal hidden">
+    <div class="crop-modal-overlay"></div>
+    <div class="crop-modal-dialog">
+      <h3>📷 调整头像位置</h3>
+      <p class="crop-hint">拖动照片让人脸居中，滑块可调整大小</p>
+      <div class="crop-area">
+        <div class="crop-circle" id="cropCircle">
+          <img id="cropImage" src="" alt="裁剪预览" draggable="false">
+        </div>
+      </div>
+      <div class="crop-zoom">
+        <span class="crop-zoom-label">🔍−</span>
+        <input type="range" id="cropZoom" min="100" max="300" value="100">
+        <span class="crop-zoom-label">+🔍</span>
+      </div>
+      <div class="crop-actions">
+        <button type="button" id="cropCancel" class="btn btn-outline">取消</button>
+        <button type="button" id="cropConfirm" class="btn btn-primary">✓ 确定使用</button>
+      </div>
+    </div>
+  </div>
+
   <!-- ==================== 导出中的加载提示 ==================== -->
   <div id="exportLoading" class="export-loading hidden">
     <div class="loading-content">
