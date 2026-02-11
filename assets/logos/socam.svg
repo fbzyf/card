@@ -1,0 +1,27 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 200" width="200" height="200">
+  <!-- SOCAM INTERNATIONAL - 全球化科技企业风格 -->
+  <defs>
+    <linearGradient id="socam-grad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#2d3748"/>
+      <stop offset="100%" style="stop-color:#1a202c"/>
+    </linearGradient>
+  </defs>
+  <!-- 六边形外框（科技感） -->
+  <polygon points="100,20 170,55 170,125 100,160 30,125 30,55" fill="url(#socam-grad)" stroke="#4a5568" stroke-width="2"/>
+  <!-- 内部电路线条 -->
+  <circle cx="100" cy="90" r="28" fill="none" stroke="#63b3ed" stroke-width="2"/>
+  <circle cx="100" cy="90" r="16" fill="none" stroke="#63b3ed" stroke-width="1.5"/>
+  <circle cx="100" cy="90" r="5" fill="#63b3ed"/>
+  <!-- 连接线 -->
+  <line x1="100" y1="62" x2="100" y2="40" stroke="#63b3ed" stroke-width="1.5"/>
+  <line x1="100" y1="118" x2="100" y2="140" stroke="#63b3ed" stroke-width="1.5"/>
+  <line x1="72" y1="90" x2="50" y2="90" stroke="#63b3ed" stroke-width="1.5"/>
+  <line x1="128" y1="90" x2="150" y2="90" stroke="#63b3ed" stroke-width="1.5"/>
+  <!-- 连接点 -->
+  <circle cx="100" cy="40" r="3" fill="#63b3ed"/>
+  <circle cx="100" cy="140" r="3" fill="#63b3ed"/>
+  <circle cx="50" cy="90" r="3" fill="#63b3ed"/>
+  <circle cx="150" cy="90" r="3" fill="#63b3ed"/>
+  <!-- 公司名 -->
+  <text x="100" y="182" text-anchor="middle" fill="#2d3748" font-family="Arial, sans-serif" font-size="18" font-weight="bold">SOCAM</text>
+</svg>

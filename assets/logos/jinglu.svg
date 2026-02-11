@@ -1,0 +1,30 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 200" width="200" height="200">
+  <!-- 上海精陆电子科技 Jinglu - 电路板PCB风格 -->
+  <defs>
+    <linearGradient id="jl-grad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#4f46e5"/>
+      <stop offset="100%" style="stop-color:#3730a3"/>
+    </linearGradient>
+  </defs>
+  <!-- 菱形外框 -->
+  <rect x="35" y="35" width="130" height="130" rx="16" fill="url(#jl-grad)" transform="rotate(0, 100, 100)"/>
+  <!-- PCB电路线条 -->
+  <path d="M60,70 L85,70 L85,55" stroke="#a5b4fc" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+  <path d="M60,95 L75,95 L75,120 L95,120" stroke="#a5b4fc" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+  <path d="M115,55 L115,75 L140,75" stroke="#a5b4fc" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+  <path d="M105,120 L125,120 L125,95 L140,95" stroke="#a5b4fc" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+  <!-- 端点/焊盘 -->
+  <circle cx="85" cy="55" r="3.5" fill="#a5b4fc"/>
+  <circle cx="60" cy="70" r="3.5" fill="#a5b4fc"/>
+  <circle cx="60" cy="95" r="3.5" fill="#a5b4fc"/>
+  <circle cx="115" cy="55" r="3.5" fill="#a5b4fc"/>
+  <circle cx="140" cy="75" r="3.5" fill="#a5b4fc"/>
+  <circle cx="140" cy="95" r="3.5" fill="#a5b4fc"/>
+  <circle cx="95" cy="120" r="3.5" fill="#a5b4fc"/>
+  <circle cx="105" cy="120" r="3.5" fill="#a5b4fc"/>
+  <!-- 中心IC芯片 -->
+  <rect x="82" y="77" width="36" height="36" rx="4" fill="white" opacity="0.15"/>
+  <text x="100" y="102" text-anchor="middle" fill="white" font-family="Arial, sans-serif" font-size="18" font-weight="bold">JL</text>
+  <!-- 底部文字 -->
+  <text x="100" y="150" text-anchor="middle" fill="white" font-family="Arial, sans-serif" font-size="11" font-weight="bold" opacity="0.7">JINGLU TECH</text>
+</svg>

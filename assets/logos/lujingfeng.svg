@@ -1,0 +1,33 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 200" width="200" height="200">
+  <!-- 上海陆精丰电子 - LJF Logo：电路板芯片风格 -->
+  <defs>
+    <linearGradient id="ljf-grad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#1a73e8"/>
+      <stop offset="100%" style="stop-color:#0d47a1"/>
+    </linearGradient>
+  </defs>
+  <!-- 芯片外框 -->
+  <rect x="50" y="50" width="100" height="100" rx="8" fill="url(#ljf-grad)"/>
+  <!-- 引脚 - 上 -->
+  <rect x="72" y="35" width="4" height="20" rx="2" fill="#1a73e8"/>
+  <rect x="88" y="35" width="4" height="20" rx="2" fill="#1a73e8"/>
+  <rect x="108" y="35" width="4" height="20" rx="2"/>
+  <rect x="124" y="35" width="4" height="20" rx="2" fill="#1a73e8"/>
+  <!-- 引脚 - 下 -->
+  <rect x="72" y="145" width="4" height="20" rx="2" fill="#1a73e8"/>
+  <rect x="88" y="145" width="4" height="20" rx="2" fill="#1a73e8"/>
+  <rect x="108" y="145" width="4" height="20" rx="2" fill="#1a73e8"/>
+  <rect x="124" y="145" width="4" height="20" rx="2" fill="#1a73e8"/>
+  <!-- 引脚 - 左 -->
+  <rect x="35" y="72" width="20" height="4" rx="2" fill="#1a73e8"/>
+  <rect x="35" y="88" width="20" height="4" rx="2" fill="#1a73e8"/>
+  <rect x="35" y="108" width="20" height="4" rx="2" fill="#1a73e8"/>
+  <rect x="35" y="124" width="20" height="4" rx="2" fill="#1a73e8"/>
+  <!-- 引脚 - 右 -->
+  <rect x="145" y="72" width="20" height="4" rx="2" fill="#1a73e8"/>
+  <rect x="145" y="88" width="20" height="4" rx="2" fill="#1a73e8"/>
+  <rect x="145" y="108" width="20" height="4" rx="2" fill="#1a73e8"/>
+  <rect x="145" y="124" width="20" height="4" rx="2" fill="#1a73e8"/>
+  <!-- 中心文字 -->
+  <text x="100" y="108" text-anchor="middle" fill="white" font-family="Arial, sans-serif" font-size="32" font-weight="bold">LJF</text>
+</svg>

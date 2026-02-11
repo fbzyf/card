@@ -1,0 +1,49 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="600" height="400" viewBox="0 0 600 400">
+  <!-- 几何线条科技背景 -->
+  <defs>
+    <linearGradient id="geo-bg" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#f8fafc"/>
+      <stop offset="100%" style="stop-color:#e2e8f0"/>
+    </linearGradient>
+  </defs>
+  <rect width="600" height="400" fill="url(#geo-bg)"/>
+  
+  <!-- 大三角形装饰 -->
+  <polygon points="500,0 600,0 600,200" fill="#dbeafe" opacity="0.6"/>
+  <polygon points="550,0 600,0 600,100" fill="#bfdbfe" opacity="0.5"/>
+  <polygon points="0,300 150,400 0,400" fill="#dbeafe" opacity="0.5"/>
+  <polygon points="0,350 80,400 0,400" fill="#bfdbfe" opacity="0.4"/>
+  
+  <!-- 六边形网格 -->
+  <g stroke="#93c5fd" stroke-width="0.8" fill="none" opacity="0.3">
+    <polygon points="480,50 510,35 540,50 540,80 510,95 480,80"/>
+    <polygon points="510,95 540,80 570,95 570,125 540,140 510,125"/>
+    <polygon points="540,50 570,35 600,50 600,80 570,95 540,80"/>
+    <polygon points="450,80 480,65 510,80 510,110 480,125 450,110"/>
+  </g>
+  
+  <g stroke="#93c5fd" stroke-width="0.8" fill="none" opacity="0.2">
+    <polygon points="30,250 60,235 90,250 90,280 60,295 30,280"/>
+    <polygon points="60,295 90,280 120,295 120,325 90,340 60,325"/>
+    <polygon points="0,280 30,265 60,280 60,310 30,325 0,310"/>
+    <polygon points="90,250 120,235 150,250 150,280 120,295 90,280"/>
+  </g>
+  
+  <!-- 圆环装饰 -->
+  <circle cx="520" cy="320" r="50" fill="none" stroke="#93c5fd" stroke-width="0.8" opacity="0.2"/>
+  <circle cx="520" cy="320" r="35" fill="none" stroke="#93c5fd" stroke-width="0.5" opacity="0.15"/>
+  <circle cx="80" cy="80" r="40" fill="none" stroke="#93c5fd" stroke-width="0.8" opacity="0.15"/>
+  <circle cx="80" cy="80" r="25" fill="none" stroke="#93c5fd" stroke-width="0.5" opacity="0.1"/>
+  
+  <!-- 点状装饰 -->
+  <circle cx="300" cy="50" r="2" fill="#60a5fa" opacity="0.2"/>
+  <circle cx="400" cy="150" r="2" fill="#60a5fa" opacity="0.15"/>
+  <circle cx="200" cy="300" r="2" fill="#60a5fa" opacity="0.2"/>
+  <circle cx="350" cy="350" r="1.5" fill="#60a5fa" opacity="0.15"/>
+  
+  <!-- 斜线装饰 -->
+  <line x1="430" y1="0" x2="600" y2="170" stroke="#93c5fd" stroke-width="0.5" opacity="0.2"/>
+  <line x1="460" y1="0" x2="600" y2="140" stroke="#93c5fd" stroke-width="0.5" opacity="0.15"/>
+  <line x1="0" y1="260" x2="170" y2="400" stroke="#93c5fd" stroke-width="0.5" opacity="0.2"/>
+  <line x1="0" y1="290" x2="140" y2="400" stroke="#93c5fd" stroke-width="0.5" opacity="0.15"/>
+</svg>

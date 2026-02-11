@@ -1,0 +1,46 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="600" height="400" viewBox="0 0 600 400">
+  <!-- 渐变波浪科技背景 -->
+  <defs>
+    <linearGradient id="wave-bg" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#312e81"/>
+      <stop offset="50%" style="stop-color:#4338ca"/>
+      <stop offset="100%" style="stop-color:#6366f1"/>
+    </linearGradient>
+  </defs>
+  <rect width="600" height="400" fill="url(#wave-bg)"/>
+  
+  <!-- 波浪线条 -->
+  <path d="M0,300 Q100,260 200,300 Q300,340 400,300 Q500,260 600,300" 
+        fill="none" stroke="white" stroke-width="1" opacity="0.1"/>
+  <path d="M0,320 Q100,280 200,320 Q300,360 400,320 Q500,280 600,320" 
+        fill="none" stroke="white" stroke-width="0.8" opacity="0.08"/>
+  <path d="M0,340 Q100,300 200,340 Q300,380 400,340 Q500,300 600,340" 
+        fill="none" stroke="white" stroke-width="0.6" opacity="0.06"/>
+  
+  <path d="M0,100 Q150,60 300,100 Q450,140 600,100" 
+        fill="none" stroke="white" stroke-width="1" opacity="0.08"/>
+  <path d="M0,80 Q150,40 300,80 Q450,120 600,80" 
+        fill="none" stroke="white" stroke-width="0.8" opacity="0.06"/>
+  
+  <!-- 光效圆 -->
+  <circle cx="480" cy="80" r="120" fill="white" opacity="0.03"/>
+  <circle cx="480" cy="80" r="80" fill="white" opacity="0.03"/>
+  <circle cx="120" cy="320" r="100" fill="white" opacity="0.02"/>
+  
+  <!-- 几何装饰 -->
+  <rect x="500" y="300" width="60" height="60" rx="4" fill="none" stroke="white" stroke-width="0.5" opacity="0.1" transform="rotate(15, 530, 330)"/>
+  <rect x="510" y="310" width="40" height="40" rx="3" fill="none" stroke="white" stroke-width="0.5" opacity="0.08" transform="rotate(30, 530, 330)"/>
+  
+  <rect x="30" y="40" width="50" height="50" rx="4" fill="none" stroke="white" stroke-width="0.5" opacity="0.08" transform="rotate(-10, 55, 65)"/>
+  <rect x="40" y="50" width="30" height="30" rx="3" fill="none" stroke="white" stroke-width="0.5" opacity="0.06" transform="rotate(5, 55, 65)"/>
+  
+  <!-- 粒子点 -->
+  <circle cx="100" cy="100" r="1.5" fill="white" opacity="0.3"/>
+  <circle cx="250" cy="60" r="1" fill="white" opacity="0.2"/>
+  <circle cx="400" cy="150" r="1.5" fill="white" opacity="0.25"/>
+  <circle cx="530" cy="200" r="1" fill="white" opacity="0.2"/>
+  <circle cx="50" cy="250" r="1.5" fill="white" opacity="0.15"/>
+  <circle cx="300" cy="220" r="1" fill="white" opacity="0.2"/>
+  <circle cx="180" cy="350" r="1.5" fill="white" opacity="0.25"/>
+  <circle cx="450" cy="350" r="1" fill="white" opacity="0.2"/>
+</svg>

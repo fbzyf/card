@@ -1,0 +1,35 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 200" width="200" height="200">
+  <!-- 北陆电子香港 Hokuriku - 电子元件/电容风格 -->
+  <defs>
+    <linearGradient id="hk-grad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#c53030"/>
+      <stop offset="100%" style="stop-color:#9b2c2c"/>
+    </linearGradient>
+  </defs>
+  <!-- 圆形背景 -->
+  <circle cx="100" cy="95" r="65" fill="url(#hk-grad)"/>
+  <!-- 字母H造型（用电路连线风格） -->
+  <!-- 左竖线 -->
+  <rect x="68" y="58" width="6" height="74" rx="3" fill="white"/>
+  <!-- 右竖线 -->
+  <rect x="126" y="58" width="6" height="74" rx="3" fill="white"/>
+  <!-- 中横线 -->
+  <rect x="68" y="92" width="64" height="6" rx="3" fill="white"/>
+  <!-- 电路节点 -->
+  <circle cx="71" cy="58" r="5" fill="white"/>
+  <circle cx="129" cy="58" r="5" fill="white"/>
+  <circle cx="71" cy="132" r="5" fill="white"/>
+  <circle cx="129" cy="132" r="5" fill="white"/>
+  <!-- 向外延伸的引脚线 -->
+  <line x1="71" y1="53" x2="71" y2="42" stroke="white" stroke-width="2" opacity="0.6"/>
+  <line x1="129" y1="53" x2="129" y2="42" stroke="white" stroke-width="2" opacity="0.6"/>
+  <line x1="71" y1="137" x2="71" y2="148" stroke="white" stroke-width="2" opacity="0.6"/>
+  <line x1="129" y1="137" x2="129" y2="148" stroke="white" stroke-width="2" opacity="0.6"/>
+  <!-- 小端点 -->
+  <circle cx="71" cy="42" r="2.5" fill="white" opacity="0.6"/>
+  <circle cx="129" cy="42" r="2.5" fill="white" opacity="0.6"/>
+  <circle cx="71" cy="148" r="2.5" fill="white" opacity="0.6"/>
+  <circle cx="129" cy="148" r="2.5" fill="white" opacity="0.6"/>
+  <!-- 文字 -->
+  <text x="100" y="185" text-anchor="middle" fill="#c53030" font-family="Arial, sans-serif" font-size="16" font-weight="bold">HOKURIKU</text>
+</svg>

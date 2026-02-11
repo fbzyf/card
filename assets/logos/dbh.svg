@@ -1,0 +1,25 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 200" width="200" height="200">
+  <!-- 上海星展瀚 DBH - 星形+数据流动风格 -->
+  <defs>
+    <linearGradient id="dbh-grad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#0077b6"/>
+      <stop offset="100%" style="stop-color:#023e8a"/>
+    </linearGradient>
+  </defs>
+  <!-- 圆形底盘 -->
+  <circle cx="100" cy="95" r="65" fill="url(#dbh-grad)"/>
+  <!-- 星形（代表"星展瀚"） -->
+  <polygon points="100,45 112,75 145,75 118,95 128,125 100,107 72,125 82,95 55,75 88,75" fill="none" stroke="white" stroke-width="2.5" stroke-linejoin="round"/>
+  <!-- 中心圆点 -->
+  <circle cx="100" cy="90" r="8" fill="white" opacity="0.9"/>
+  <!-- 数据流线条 -->
+  <path d="M100,98 L100,125" stroke="white" stroke-width="1.5" opacity="0.6"/>
+  <path d="M92,94 L70,110" stroke="white" stroke-width="1.5" opacity="0.6"/>
+  <path d="M108,94 L130,110" stroke="white" stroke-width="1.5" opacity="0.6"/>
+  <!-- 端点 -->
+  <circle cx="100" cy="128" r="3" fill="white" opacity="0.7"/>
+  <circle cx="68" cy="112" r="3" fill="white" opacity="0.7"/>
+  <circle cx="132" cy="112" r="3" fill="white" opacity="0.7"/>
+  <!-- 文字 -->
+  <text x="100" y="185" text-anchor="middle" fill="#0077b6" font-family="Arial, sans-serif" font-size="24" font-weight="bold">DBH</text>
+</svg>

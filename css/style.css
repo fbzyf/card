@@ -1,0 +1,1143 @@
+/* ============================================
+   电子名片制作器 - 样式表
+   ============================================ */
+
+/* ---------- CSS 变量 ---------- */
+:root {
+  --primary: #4f46e5;
+  --primary-light: #eef2ff;
+  --primary-dark: #3730a3;
+  --accent: #f59e0b;
+  --accent-light: #fffbeb;
+  --bg: #f8fafc;
+  --bg-white: #ffffff;
+  --text: #1e293b;
+  --text-secondary: #64748b;
+  --text-light: #94a3b8;
+  --border: #e2e8f0;
+  --border-focus: #4f46e5;
+  --shadow: 0 1px 3px rgba(0,0,0,0.1), 0 1px 2px rgba(0,0,0,0.06);
+  --shadow-md: 0 4px 6px -1px rgba(0,0,0,0.1), 0 2px 4px -1px rgba(0,0,0,0.06);
+  --shadow-lg: 0 10px 15px -3px rgba(0,0,0,0.1), 0 4px 6px -2px rgba(0,0,0,0.05);
+  --radius: 12px;
+  --radius-sm: 8px;
+  --radius-xs: 4px;
+  --transition: all 0.2s ease;
+
+  /* 名片尺寸（像素，3倍率以保证导出清晰度） */
+  --card-h-width: 540px;    /* 横版宽度 90mm × 6 */
+  --card-h-height: 324px;   /* 横版高度 54mm × 6 */
+  --card-v-width: 324px;    /* 竖版宽度 */
+  --card-v-height: 540px;   /* 竖版高度 */
+}
+
+/* ---------- 重置样式 ---------- */
+*, *::before, *::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  font-family: 'Noto Sans SC', 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+  background-color: var(--bg);
+  color: var(--text);
+  line-height: 1.6;
+  min-height: 100vh;
+}
+
+/* ---------- 顶部标题栏 ---------- */
+.header {
+  background: linear-gradient(135deg, var(--primary), var(--primary-dark));
+  color: white;
+  padding: 20px 0;
+  box-shadow: var(--shadow-md);
+  position: sticky;
+  top: 0;
+  z-index: 100;
+}
+
+.header-inner {
+  max-width: 1400px;
+  margin: 0 auto;
+  padding: 0 24px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.header-logo {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.header-icon {
+  font-size: 32px;
+}
+
+.header h1 {
+  font-size: 22px;
+  font-weight: 700;
+  letter-spacing: 1px;
+}
+
+.header p {
+  font-size: 13px;
+  opacity: 0.85;
+  margin-top: 2px;
+}
+
+/* ---------- 主内容布局 ---------- */
+.main-container {
+  max-width: 1400px;
+  margin: 0 auto;
+  padding: 24px;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 24px;
+  align-items: start;
+}
+
+/* ---------- 左侧编辑面板 ---------- */
+.editor-panel {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.editor-section {
+  background: var(--bg-white);
+  border-radius: var(--radius);
+  padding: 24px;
+  box-shadow: var(--shadow);
+  border: 1px solid var(--border);
+}
+
+.section-header {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin-bottom: 16px;
+}
+
+.step-badge {
+  width: 28px;
+  height: 28px;
+  background: var(--primary);
+  color: white;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 14px;
+  font-weight: 700;
+  flex-shrink: 0;
+}
+
+.section-header h2 {
+  font-size: 16px;
+  font-weight: 600;
+}
+
+/* ---------- 表单样式 ---------- */
+.form-group {
+  margin-bottom: 12px;
+}
+
+.form-group:last-child {
+  margin-bottom: 0;
+}
+
+.form-group label {
+  display: block;
+  font-size: 13px;
+  font-weight: 500;
+  color: var(--text-secondary);
+  margin-bottom: 6px;
+}
+
+.required {
+  color: #ef4444;
+}
+
+.form-input,
+.form-select {
+  width: 100%;
+  padding: 10px 14px;
+  border: 1.5px solid var(--border);
+  border-radius: var(--radius-sm);
+  font-size: 14px;
+  font-family: inherit;
+  color: var(--text);
+  background: var(--bg-white);
+  transition: var(--transition);
+  outline: none;
+}
+
+.form-input:focus,
+.form-select:focus {
+  border-color: var(--border-focus);
+  box-shadow: 0 0 0 3px rgba(79, 70, 229, 0.1);
+}
+
+.form-input::placeholder {
+  color: var(--text-light);
+}
+
+.form-row {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 12px;
+}
+
+.form-row .form-group {
+  margin-bottom: 0;
+}
+
+/* ---------- 公司信息预览 ---------- */
+.company-info {
+  background: var(--primary-light);
+  border-radius: var(--radius-sm);
+  padding: 12px 16px;
+  margin-top: 12px;
+}
+
+.company-info-row {
+  display: flex;
+  align-items: flex-start;
+  gap: 8px;
+  font-size: 13px;
+  color: var(--text-secondary);
+  margin-bottom: 6px;
+}
+
+.company-info-row:last-child {
+  margin-bottom: 0;
+}
+
+.info-label {
+  flex-shrink: 0;
+}
+
+/* ---------- 版式选择 ---------- */
+.layout-options {
+  display: flex;
+  gap: 16px;
+}
+
+.layout-option {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 8px;
+  padding: 16px;
+  border: 2px solid var(--border);
+  border-radius: var(--radius-sm);
+  cursor: pointer;
+  transition: var(--transition);
+  text-align: center;
+}
+
+.layout-option:hover {
+  border-color: var(--primary);
+  background: var(--primary-light);
+}
+
+.layout-option.active {
+  border-color: var(--primary);
+  background: var(--primary-light);
+}
+
+.layout-option input[type="radio"] {
+  display: none;
+}
+
+.layout-option span {
+  font-size: 14px;
+  font-weight: 500;
+}
+
+.layout-preview {
+  background: var(--bg);
+  border: 1px solid var(--border);
+  border-radius: 4px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.layout-preview-h {
+  width: 80px;
+  height: 48px;
+}
+
+.layout-preview-v {
+  width: 48px;
+  height: 80px;
+}
+
+.layout-lines div {
+  background: var(--text-light);
+  border-radius: 2px;
+  height: 3px;
+  margin: 4px 8px;
+}
+
+.layout-lines div:nth-child(1) { width: 30px; }
+.layout-lines div:nth-child(2) { width: 40px; }
+.layout-lines div:nth-child(3) { width: 25px; }
+
+/* ---------- 模板选择 ---------- */
+.template-options {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 10px;
+}
+
+.template-option {
+  position: relative;
+  border: 2px solid var(--border);
+  border-radius: var(--radius-sm);
+  padding: 10px 6px;
+  cursor: pointer;
+  transition: var(--transition);
+  text-align: center;
+  overflow: hidden;
+}
+
+.template-option:hover {
+  border-color: var(--primary);
+  transform: translateY(-2px);
+  box-shadow: var(--shadow-md);
+}
+
+.template-option.active {
+  border-color: var(--primary);
+  background: var(--primary-light);
+}
+
+.template-option.active::after {
+  content: "✓";
+  position: absolute;
+  top: 4px;
+  right: 6px;
+  width: 18px;
+  height: 18px;
+  background: var(--primary);
+  color: white;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 10px;
+  font-weight: 700;
+}
+
+.template-color-block {
+  width: 100%;
+  height: 40px;
+  border-radius: 4px;
+  margin-bottom: 6px;
+}
+
+.template-option .template-name {
+  font-size: 11px;
+  font-weight: 500;
+  color: var(--text);
+  line-height: 1.3;
+}
+
+/* ---------- 头像上传 ---------- */
+.avatar-upload {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+}
+
+.avatar-preview {
+  width: 64px;
+  height: 64px;
+  border-radius: 50%;
+  background: var(--bg);
+  border: 2px dashed var(--border);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+  flex-shrink: 0;
+}
+
+.avatar-preview img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.avatar-placeholder {
+  font-size: 28px;
+  opacity: 0.4;
+}
+
+.avatar-actions {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+/* ---------- 按钮样式 ---------- */
+.btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+  padding: 10px 20px;
+  border: none;
+  border-radius: var(--radius-sm);
+  font-size: 14px;
+  font-weight: 600;
+  font-family: inherit;
+  cursor: pointer;
+  transition: var(--transition);
+  text-decoration: none;
+}
+
+.btn-primary {
+  background: var(--primary);
+  color: white;
+}
+
+.btn-primary:hover {
+  background: var(--primary-dark);
+  box-shadow: var(--shadow-md);
+}
+
+.btn-accent {
+  background: var(--accent);
+  color: white;
+}
+
+.btn-accent:hover {
+  background: #d97706;
+  box-shadow: var(--shadow-md);
+}
+
+.btn-outline {
+  background: transparent;
+  color: var(--primary);
+  border: 1.5px solid var(--primary);
+}
+
+.btn-outline:hover {
+  background: var(--primary-light);
+}
+
+.btn-text {
+  background: transparent;
+  color: var(--text-secondary);
+  padding: 4px 8px;
+}
+
+.btn-text:hover {
+  color: #ef4444;
+}
+
+.btn-sm {
+  padding: 6px 14px;
+  font-size: 13px;
+}
+
+.btn-lg {
+  padding: 12px 24px;
+  font-size: 15px;
+  width: 100%;
+}
+
+/* ---------- 导出按钮区 ---------- */
+.export-buttons {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+/* ---------- 右侧预览面板 ---------- */
+.preview-panel {
+  background: var(--bg-white);
+  border-radius: var(--radius);
+  padding: 24px;
+  box-shadow: var(--shadow);
+  border: 1px solid var(--border);
+  position: sticky;
+  top: 88px;
+}
+
+.preview-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 20px;
+}
+
+.preview-header h2 {
+  font-size: 16px;
+  font-weight: 600;
+}
+
+/* ---------- 预览标签切换 ---------- */
+.preview-tabs {
+  display: flex;
+  gap: 4px;
+  background: var(--bg);
+  border-radius: var(--radius-sm);
+  padding: 3px;
+}
+
+.preview-tab {
+  padding: 6px 14px;
+  border: none;
+  background: transparent;
+  border-radius: 6px;
+  font-size: 13px;
+  font-weight: 500;
+  color: var(--text-secondary);
+  cursor: pointer;
+  transition: var(--transition);
+  font-family: inherit;
+}
+
+.preview-tab:hover {
+  color: var(--text);
+}
+
+.preview-tab.active {
+  background: var(--bg-white);
+  color: var(--primary);
+  box-shadow: var(--shadow);
+}
+
+/* ---------- 名片预览容器 ---------- */
+.preview-wrapper {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 400px;
+  background: var(--bg);
+  border-radius: var(--radius-sm);
+  padding: 30px;
+}
+
+.card-preview-container {
+  display: none;
+  justify-content: center;
+  align-items: center;
+}
+
+.card-preview-container.active {
+  display: flex;
+}
+
+/* ============================================
+   名片样式 - 核心部分
+   ============================================ */
+
+/* ---------- 名片基础样式 ---------- */
+.business-card {
+  background: #1b365d;
+  color: #ffffff;
+  border-radius: 8px;
+  overflow: hidden;
+  box-shadow: var(--shadow-lg);
+  position: relative;
+  font-family: 'Noto Sans SC', 'Inter', sans-serif;
+}
+
+/* 横版尺寸 */
+.business-card.horizontal {
+  width: var(--card-h-width);
+  height: var(--card-h-height);
+}
+
+/* 竖版尺寸 */
+.business-card.vertical {
+  width: var(--card-v-width);
+  height: var(--card-v-height);
+}
+
+/* ---------- 名片内容布局 ---------- */
+.card-content {
+  width: 100%;
+  height: 100%;
+  padding: 28px 32px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+/* 竖版名片布局调整 */
+.business-card.vertical .card-content {
+  padding: 32px 24px;
+  justify-content: flex-start;
+  gap: 16px;
+}
+
+/* ---------- Logo 和公司名区域 ---------- */
+.card-logo-area {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin-bottom: 8px;
+}
+
+.business-card.vertical .card-logo-area {
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  margin-bottom: 12px;
+}
+
+.card-logo {
+  width: 44px;
+  height: 44px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  overflow: hidden;
+}
+
+.card-logo img {
+  max-width: 100%;
+  max-height: 100%;
+  object-fit: contain;
+}
+
+.logo-placeholder {
+  font-size: 10px;
+  font-weight: 700;
+  opacity: 0.5;
+  letter-spacing: 1px;
+  border: 1.5px dashed currentColor;
+  padding: 4px 6px;
+  border-radius: 4px;
+}
+
+.card-company-name {
+  font-size: 14px;
+  font-weight: 600;
+  letter-spacing: 0.5px;
+  opacity: 0.9;
+}
+
+.business-card.vertical .card-company-name {
+  font-size: 13px;
+}
+
+/* ---------- 个人信息区域 ---------- */
+.card-info-area {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+}
+
+.business-card.vertical .card-info-area {
+  justify-content: flex-start;
+  text-align: center;
+}
+
+.card-person-name {
+  font-size: 22px;
+  font-weight: 700;
+  letter-spacing: 2px;
+  margin-bottom: 2px;
+}
+
+.business-card.vertical .card-person-name {
+  font-size: 20px;
+}
+
+.card-person-title {
+  font-size: 12px;
+  opacity: 0.75;
+  margin-bottom: 10px;
+}
+
+.card-title-text {
+  /* 职位 */
+}
+
+.card-dept-text::before {
+  content: " | ";
+}
+
+.card-dept-text:empty::before {
+  content: "";
+}
+
+/* ---------- 分割线 ---------- */
+.card-divider {
+  width: 40px;
+  height: 2px;
+  background: currentColor;
+  opacity: 0.4;
+  margin-bottom: 10px;
+  border-radius: 1px;
+}
+
+.business-card.vertical .card-divider {
+  margin-left: auto;
+  margin-right: auto;
+}
+
+/* ---------- 联系信息列表 ---------- */
+.card-contact-list {
+  display: flex;
+  flex-direction: column;
+  gap: 3px;
+}
+
+.business-card.vertical .card-contact-list {
+  align-items: flex-start;
+  text-align: left;
+  padding: 0 4px;
+}
+
+.card-contact-item {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 10.5px;
+  opacity: 0.85;
+}
+
+.contact-icon {
+  font-size: 11px;
+  width: 16px;
+  text-align: center;
+  flex-shrink: 0;
+}
+
+.contact-text {
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+/* 地址允许换行 */
+.card-contact-address .contact-text {
+  white-space: normal;
+  line-height: 1.4;
+  font-size: 9.5px;
+}
+
+/* ---------- 姓名行（头像+姓名职位） ---------- */
+.card-name-row {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.business-card.vertical .card-name-row {
+  flex-direction: column;
+  align-items: center;
+}
+
+.card-name-block {
+  flex: 1;
+}
+
+.business-card.vertical .card-name-block {
+  text-align: center;
+}
+
+/* ---------- 头像在名片中的显示 ---------- */
+.card-avatar {
+  width: 56px;
+  height: 56px;
+  border-radius: 50%;
+  overflow: hidden;
+  border: 2px solid rgba(255,255,255,0.3);
+  flex-shrink: 0;
+  display: none;
+}
+
+.card-avatar.show {
+  display: block;
+}
+
+.card-avatar img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+/* 浅色模板的头像边框 */
+.business-card.theme-modern .card-avatar,
+.business-card.theme-china-red .card-avatar {
+  border-color: rgba(0,0,0,0.1);
+}
+
+/* ============================================
+   名片模板主题样式
+   ============================================ */
+
+/* 经典商务 Classic */
+.business-card.theme-classic {
+  background: #1b365d;
+  color: #ffffff;
+}
+.business-card.theme-classic .card-divider {
+  background: #c9a84c;
+  opacity: 1;
+}
+.business-card.theme-classic .card-person-title {
+  color: #b8cce4;
+}
+
+/* 清新现代 Modern */
+.business-card.theme-modern {
+  background: #ffffff;
+  color: #2d3748;
+}
+.business-card.theme-modern .card-divider {
+  background: #38b2ac;
+  opacity: 1;
+}
+.business-card.theme-modern .card-person-title {
+  color: #718096;
+}
+.business-card.theme-modern .card-contact-item {
+  color: #4a5568;
+}
+.business-card.theme-modern .logo-placeholder {
+  color: #718096;
+  border-color: #718096;
+}
+
+/* 极简黑金 Dark Gold */
+.business-card.theme-dark-gold {
+  background: #1a1a2e;
+  color: #d4af37;
+}
+.business-card.theme-dark-gold .card-divider {
+  background: #d4af37;
+  opacity: 0.6;
+}
+.business-card.theme-dark-gold .card-person-title,
+.business-card.theme-dark-gold .card-contact-item {
+  color: #c0c0c0;
+}
+.business-card.theme-dark-gold .card-company-name {
+  color: #d4af37;
+}
+
+/* 科技蓝 Tech Blue */
+.business-card.theme-tech-blue {
+  background: linear-gradient(135deg, #0077b6, #00b4d8);
+  color: #ffffff;
+}
+.business-card.theme-tech-blue .card-divider {
+  background: #90e0ef;
+  opacity: 0.8;
+}
+.business-card.theme-tech-blue .card-person-title {
+  color: #caf0f8;
+}
+
+/* 中国红 China Red */
+.business-card.theme-china-red {
+  background: #ffffff;
+  color: #1a1a1a;
+  border: 1.5px solid #c53030;
+}
+.business-card.theme-china-red .card-divider {
+  background: #c53030;
+  opacity: 1;
+}
+.business-card.theme-china-red .card-company-name {
+  color: #c53030;
+}
+.business-card.theme-china-red .card-person-title {
+  color: #666666;
+}
+.business-card.theme-china-red .card-contact-item {
+  color: #444444;
+}
+.business-card.theme-china-red .logo-placeholder {
+  color: #c53030;
+  border-color: #c53030;
+}
+/* 中国红 - 装饰元素 */
+.business-card.theme-china-red::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 4px;
+  background: #c53030;
+}
+.business-card.theme-china-red::after {
+  content: "";
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  height: 4px;
+  background: #c53030;
+}
+
+/* ============================================
+   带背景图案的新模板
+   ============================================ */
+
+/* 电路板 Circuit */
+.business-card.theme-circuit {
+  background: #0a5e2a;
+  background-image: url('../assets/backgrounds/circuit.svg');
+  background-size: cover;
+  background-position: center;
+  color: #ffffff;
+}
+.business-card.theme-circuit .card-content {
+  position: relative;
+  z-index: 1;
+}
+.business-card.theme-circuit .card-divider {
+  background: #34d399;
+  opacity: 1;
+}
+.business-card.theme-circuit .card-person-title {
+  color: #a7f3d0;
+}
+.business-card.theme-circuit .card-contact-item {
+  color: #d1fae5;
+}
+.business-card.theme-circuit .card-company-name {
+  color: #6ee7b7;
+}
+
+/* 星空科技 Starfield */
+.business-card.theme-starfield {
+  background: #0a0a1a;
+  background-image: url('../assets/backgrounds/starfield.svg');
+  background-size: cover;
+  background-position: center;
+  color: #ffffff;
+}
+.business-card.theme-starfield .card-content {
+  position: relative;
+  z-index: 1;
+}
+.business-card.theme-starfield .card-divider {
+  background: #6366f1;
+  opacity: 1;
+}
+.business-card.theme-starfield .card-person-title {
+  color: #a5b4fc;
+}
+.business-card.theme-starfield .card-contact-item {
+  color: #c7d2fe;
+}
+.business-card.theme-starfield .card-company-name {
+  color: #818cf8;
+}
+.business-card.theme-starfield .card-person-name {
+  text-shadow: 0 0 20px rgba(99, 102, 241, 0.3);
+}
+
+/* 几何蓝白 Geometric */
+.business-card.theme-geometric {
+  background: #f8fafc;
+  background-image: url('../assets/backgrounds/geometric.svg');
+  background-size: cover;
+  background-position: center;
+  color: #1e293b;
+}
+.business-card.theme-geometric .card-content {
+  position: relative;
+  z-index: 1;
+}
+.business-card.theme-geometric .card-divider {
+  background: #3b82f6;
+  opacity: 1;
+}
+.business-card.theme-geometric .card-person-title {
+  color: #475569;
+}
+.business-card.theme-geometric .card-contact-item {
+  color: #334155;
+}
+.business-card.theme-geometric .card-company-name {
+  color: #1e40af;
+}
+.business-card.theme-geometric .logo-placeholder {
+  color: #3b82f6;
+  border-color: #3b82f6;
+}
+.business-card.theme-geometric .card-avatar {
+  border-color: rgba(59, 130, 246, 0.3);
+}
+
+/* 紫韵波纹 Wave */
+.business-card.theme-wave {
+  background: #4338ca;
+  background-image: url('../assets/backgrounds/wave.svg');
+  background-size: cover;
+  background-position: center;
+  color: #ffffff;
+}
+.business-card.theme-wave .card-content {
+  position: relative;
+  z-index: 1;
+}
+.business-card.theme-wave .card-divider {
+  background: #a5b4fc;
+  opacity: 0.8;
+}
+.business-card.theme-wave .card-person-title {
+  color: #c7d2fe;
+}
+.business-card.theme-wave .card-contact-item {
+  color: #e0e7ff;
+}
+.business-card.theme-wave .card-company-name {
+  color: #c7d2fe;
+}
+
+/* ============================================
+   加载提示
+   ============================================ */
+.export-loading {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(0,0,0,0.5);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 9999;
+}
+
+.loading-content {
+  background: white;
+  padding: 32px 48px;
+  border-radius: var(--radius);
+  text-align: center;
+  box-shadow: var(--shadow-lg);
+}
+
+.loading-spinner {
+  width: 40px;
+  height: 40px;
+  border: 3px solid var(--border);
+  border-top-color: var(--primary);
+  border-radius: 50%;
+  animation: spin 0.8s linear infinite;
+  margin: 0 auto 16px;
+}
+
+@keyframes spin {
+  to { transform: rotate(360deg); }
+}
+
+.loading-content p {
+  font-size: 14px;
+  color: var(--text-secondary);
+}
+
+/* ---------- 隐藏类 ---------- */
+.hidden {
+  display: none !important;
+}
+
+/* ---------- 底部 ---------- */
+.footer {
+  text-align: center;
+  padding: 24px;
+  color: var(--text-light);
+  font-size: 13px;
+}
+
+/* ============================================
+   响应式布局 - 手机适配
+   ============================================ */
+@media (max-width: 1024px) {
+  .main-container {
+    grid-template-columns: 1fr;
+  }
+
+  .preview-panel {
+    position: static;
+  }
+}
+
+@media (max-width: 640px) {
+  .header h1 {
+    font-size: 18px;
+  }
+
+  .header p {
+    font-size: 12px;
+  }
+
+  .main-container {
+    padding: 16px;
+    gap: 16px;
+  }
+
+  .editor-section {
+    padding: 16px;
+  }
+
+  .form-row {
+    grid-template-columns: 1fr;
+  }
+
+  .template-options {
+    grid-template-columns: repeat(3, 1fr);
+  }
+
+  .layout-options {
+    gap: 10px;
+  }
+
+  .preview-wrapper {
+    padding: 16px;
+    overflow-x: auto;
+  }
+
+  .business-card.horizontal {
+    transform: scale(0.6);
+    transform-origin: center center;
+  }
+
+  .business-card.vertical {
+    transform: scale(0.7);
+    transform-origin: center center;
+  }
+
+  .preview-header {
+    flex-direction: column;
+    gap: 12px;
+    align-items: flex-start;
+  }
+}
+
+/* ============================================
+   打印时隐藏编辑区域
+   ============================================ */
+@media print {
+  .editor-panel,
+  .header,
+  .footer {
+    display: none;
+  }
+
+  .main-container {
+    grid-template-columns: 1fr;
+  }
+}
