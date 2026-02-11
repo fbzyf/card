@@ -62,12 +62,15 @@
         </div>
       </div>
 
-      <!-- 步骤2：选择版式 -->
+      <!-- 步骤2：选择版式和模板 -->
       <div class="editor-section">
         <div class="section-header">
           <span class="step-badge">2</span>
-          <h2>选择版式</h2>
+          <h2>选择版式和模板</h2>
         </div>
+        
+        <!-- 版式选择 -->
+        <div class="subsection-label">版式</div>
         <div class="layout-options">
           <label class="layout-option active" data-layout="horizontal">
             <input type="radio" name="layout" value="horizontal" checked>
@@ -88,23 +91,18 @@
             <span>竖版</span>
           </label>
         </div>
-      </div>
 
-      <!-- 步骤3：选择模板 -->
-      <div class="editor-section">
-        <div class="section-header">
-          <span class="step-badge">3</span>
-          <h2>选择模板</h2>
-        </div>
+        <!-- 模板选择 -->
+        <div class="subsection-label" style="margin-top: 16px;">模板风格</div>
         <div id="templateOptions" class="template-options">
           <!-- JS动态生成模板选项 -->
         </div>
       </div>
 
-      <!-- 步骤4：填写个人信息 -->
+      <!-- 步骤3：填写个人信息 -->
       <div class="editor-section">
         <div class="section-header">
-          <span class="step-badge">4</span>
+          <span class="step-badge">3</span>
           <h2>填写个人信息</h2>
         </div>
         
@@ -179,22 +177,24 @@
         </div>
       </div>
 
-      <!-- 步骤5：导出 -->
+      <!-- 步骤4：导出 -->
       <div class="editor-section">
         <div class="section-header">
-          <span class="step-badge">5</span>
+          <span class="step-badge">4</span>
           <h2>导出名片</h2>
         </div>
         <div class="export-buttons">
-          <button type="button" id="exportCN" class="btn btn-primary btn-lg">
-            📥 导出中文名片
-          </button>
-          <button type="button" id="exportEN" class="btn btn-primary btn-lg">
-            📥 导出英文名片
-          </button>
           <button type="button" id="exportAll" class="btn btn-accent btn-lg">
-            📥 一键导出全部
+            📥 一键导出全部名片
           </button>
+          <div class="export-row">
+            <button type="button" id="exportCN" class="btn btn-primary btn-md">
+              导出中文名片
+            </button>
+            <button type="button" id="exportEN" class="btn btn-primary btn-md">
+              导出英文名片
+            </button>
+          </div>
         </div>
       </div>
     </section>
@@ -203,119 +203,123 @@
     <section class="preview-panel">
       <div class="preview-header">
         <h2>👁️ 名片预览</h2>
-        <div class="preview-tabs">
-          <button class="preview-tab active" data-lang="cn">🇨🇳 中文面</button>
-          <button class="preview-tab" data-lang="en">🇬🇧 英文面</button>
-        </div>
+        <span class="preview-hint">填写信息后实时更新</span>
       </div>
 
-      <!-- 名片预览容器 -->
-      <div class="preview-wrapper">
-        <!-- 中文名片预览 -->
-        <div id="cardPreviewCN" class="card-preview-container active">
-          <div id="cardCN" class="business-card horizontal">
-            <div class="card-content">
-              <!-- 名片左侧/上方区域 -->
-              <div class="card-logo-area">
-                <div class="card-logo" id="cardLogoCN">
-                  <span class="logo-placeholder">LOGO</span>
-                </div>
-                <div class="card-company-name" id="cardCompanyNameCN">公司名称</div>
-              </div>
-              <!-- 名片主要信息区域 -->
-              <div class="card-info-area">
-                <div class="card-name-row">
-                  <div class="card-avatar" id="cardAvatarCN">
-                    <!-- 头像由JS动态填充 -->
+      <!-- 中文名片预览 -->
+      <div class="card-section">
+        <div class="card-section-label">🇨🇳 中文面</div>
+        <div class="preview-wrapper">
+          <div id="cardPreviewCN" class="card-preview-container active">
+            <div id="cardCN" class="business-card horizontal">
+              <div class="card-content">
+                <!-- 名片左侧/上方区域 -->
+                <div class="card-logo-area">
+                  <div class="card-logo" id="cardLogoCN">
+                    <span class="logo-placeholder">LOGO</span>
                   </div>
-                  <div class="card-name-block">
-                    <div class="card-person-name" id="cardNameCN">您的姓名</div>
-                    <div class="card-person-title" id="cardTitleCN">
-                      <span class="card-title-text" id="cardTitleTextCN">职位名称</span>
-                      <span class="card-dept-text" id="cardDeptTextCN"></span>
+                  <div class="card-company-name" id="cardCompanyNameCN">公司名称</div>
+                </div>
+                <!-- 名片主要信息区域 -->
+                <div class="card-info-area">
+                  <div class="card-name-row">
+                    <div class="card-avatar" id="cardAvatarCN">
+                      <!-- 头像由JS动态填充 -->
+                    </div>
+                    <div class="card-name-block">
+                      <div class="card-person-name" id="cardNameCN">您的姓名</div>
+                      <div class="card-person-title" id="cardTitleCN">
+                        <span class="card-title-text" id="cardTitleTextCN">职位名称</span>
+                        <span class="card-dept-text" id="cardDeptTextCN"></span>
+                      </div>
                     </div>
                   </div>
-                </div>
-                <div class="card-divider"></div>
-                <div class="card-contact-list" id="cardContactsCN">
-                  <div class="card-contact-item">
-                    <span class="contact-icon">📱</span>
-                    <span class="contact-text" id="cardMobileCN">手机号码</span>
-                  </div>
-                  <div class="card-contact-item">
-                    <span class="contact-icon">✉️</span>
-                    <span class="contact-text" id="cardEmailCN">电子邮箱</span>
-                  </div>
-                  <div class="card-contact-item card-contact-wechat hidden" id="cardWechatRowCN">
-                    <span class="contact-icon">💬</span>
-                    <span class="contact-text" id="cardWechatCN"></span>
-                  </div>
-                  <div class="card-contact-item card-contact-tel hidden" id="cardTelRowCN">
-                    <span class="contact-icon">📞</span>
-                    <span class="contact-text" id="cardTelCN"></span>
-                  </div>
-                  <div class="card-contact-item card-contact-website hidden" id="cardWebsiteRowCN">
-                    <span class="contact-icon">🌐</span>
-                    <span class="contact-text" id="cardWebsiteCN"></span>
-                  </div>
-                  <div class="card-contact-item card-contact-address">
-                    <span class="contact-icon">📍</span>
-                    <span class="contact-text" id="cardAddressCN">公司地址</span>
+                  <div class="card-divider"></div>
+                  <div class="card-contact-list" id="cardContactsCN">
+                    <div class="card-contact-item">
+                      <span class="contact-icon">📱</span>
+                      <span class="contact-text" id="cardMobileCN">手机号码</span>
+                    </div>
+                    <div class="card-contact-item">
+                      <span class="contact-icon">✉️</span>
+                      <span class="contact-text" id="cardEmailCN">电子邮箱</span>
+                    </div>
+                    <div class="card-contact-item card-contact-wechat hidden" id="cardWechatRowCN">
+                      <span class="contact-icon">💬</span>
+                      <span class="contact-text" id="cardWechatCN"></span>
+                    </div>
+                    <div class="card-contact-item card-contact-tel hidden" id="cardTelRowCN">
+                      <span class="contact-icon">📞</span>
+                      <span class="contact-text" id="cardTelCN"></span>
+                    </div>
+                    <div class="card-contact-item card-contact-website hidden" id="cardWebsiteRowCN">
+                      <span class="contact-icon">🌐</span>
+                      <span class="contact-text" id="cardWebsiteCN"></span>
+                    </div>
+                    <div class="card-contact-item card-contact-address">
+                      <span class="contact-icon">📍</span>
+                      <span class="contact-text" id="cardAddressCN">公司地址</span>
+                    </div>
                   </div>
                 </div>
               </div>
             </div>
           </div>
         </div>
+      </div>
 
-        <!-- 英文名片预览 -->
-        <div id="cardPreviewEN" class="card-preview-container">
-          <div id="cardEN" class="business-card horizontal">
-            <div class="card-content">
-              <div class="card-logo-area">
-                <div class="card-logo" id="cardLogoEN">
-                  <span class="logo-placeholder">LOGO</span>
-                </div>
-                <div class="card-company-name" id="cardCompanyNameEN">Company Name</div>
-              </div>
-              <div class="card-info-area">
-                <div class="card-name-row">
-                  <div class="card-avatar" id="cardAvatarEN">
-                    <!-- 头像由JS动态填充 -->
+      <!-- 英文名片预览 -->
+      <div class="card-section">
+        <div class="card-section-label">🇬🇧 英文面</div>
+        <div class="preview-wrapper">
+          <div id="cardPreviewEN" class="card-preview-container active">
+            <div id="cardEN" class="business-card horizontal">
+              <div class="card-content">
+                <div class="card-logo-area">
+                  <div class="card-logo" id="cardLogoEN">
+                    <span class="logo-placeholder">LOGO</span>
                   </div>
-                  <div class="card-name-block">
-                    <div class="card-person-name" id="cardNameEN">Your Name</div>
-                    <div class="card-person-title" id="cardTitleEN">
-                      <span class="card-title-text" id="cardTitleTextEN">Job Title</span>
-                      <span class="card-dept-text" id="cardDeptTextEN"></span>
+                  <div class="card-company-name" id="cardCompanyNameEN">Company Name</div>
+                </div>
+                <div class="card-info-area">
+                  <div class="card-name-row">
+                    <div class="card-avatar" id="cardAvatarEN">
+                      <!-- 头像由JS动态填充 -->
+                    </div>
+                    <div class="card-name-block">
+                      <div class="card-person-name" id="cardNameEN">Your Name</div>
+                      <div class="card-person-title" id="cardTitleEN">
+                        <span class="card-title-text" id="cardTitleTextEN">Job Title</span>
+                        <span class="card-dept-text" id="cardDeptTextEN"></span>
+                      </div>
                     </div>
                   </div>
-                </div>
-                <div class="card-divider"></div>
-                <div class="card-contact-list" id="cardContactsEN">
-                  <div class="card-contact-item">
-                    <span class="contact-icon">📱</span>
-                    <span class="contact-text" id="cardMobileEN">Mobile Number</span>
-                  </div>
-                  <div class="card-contact-item">
-                    <span class="contact-icon">✉️</span>
-                    <span class="contact-text" id="cardEmailEN">Email Address</span>
-                  </div>
-                  <div class="card-contact-item card-contact-wechat hidden" id="cardWechatRowEN">
-                    <span class="contact-icon">💬</span>
-                    <span class="contact-text" id="cardWechatEN"></span>
-                  </div>
-                  <div class="card-contact-item card-contact-tel hidden" id="cardTelRowEN">
-                    <span class="contact-icon">📞</span>
-                    <span class="contact-text" id="cardTelEN"></span>
-                  </div>
-                  <div class="card-contact-item card-contact-website hidden" id="cardWebsiteRowEN">
-                    <span class="contact-icon">🌐</span>
-                    <span class="contact-text" id="cardWebsiteEN"></span>
-                  </div>
-                  <div class="card-contact-item card-contact-address">
-                    <span class="contact-icon">📍</span>
-                    <span class="contact-text" id="cardAddressEN">Company Address</span>
+                  <div class="card-divider"></div>
+                  <div class="card-contact-list" id="cardContactsEN">
+                    <div class="card-contact-item">
+                      <span class="contact-icon">📱</span>
+                      <span class="contact-text" id="cardMobileEN">Mobile Number</span>
+                    </div>
+                    <div class="card-contact-item">
+                      <span class="contact-icon">✉️</span>
+                      <span class="contact-text" id="cardEmailEN">Email Address</span>
+                    </div>
+                    <div class="card-contact-item card-contact-wechat hidden" id="cardWechatRowEN">
+                      <span class="contact-icon">💬</span>
+                      <span class="contact-text" id="cardWechatEN"></span>
+                    </div>
+                    <div class="card-contact-item card-contact-tel hidden" id="cardTelRowEN">
+                      <span class="contact-icon">📞</span>
+                      <span class="contact-text" id="cardTelEN"></span>
+                    </div>
+                    <div class="card-contact-item card-contact-website hidden" id="cardWebsiteRowEN">
+                      <span class="contact-icon">🌐</span>
+                      <span class="contact-text" id="cardWebsiteEN"></span>
+                    </div>
+                    <div class="card-contact-item card-contact-address">
+                      <span class="contact-icon">📍</span>
+                      <span class="contact-text" id="cardAddressEN">Company Address</span>
+                    </div>
                   </div>
                 </div>
               </div>

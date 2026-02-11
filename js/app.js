@@ -1,20 +1,19 @@
 /**
- * 电子名片制作器 - 主应用逻辑
+ * 电子名片制作器 - 主应用逻辑 v2.0
  * ============================
  * 负责：
  * 1. 初始化页面（填充公司列表、模板选项）
  * 2. 表单交互（监听输入变化）
- * 3. 实时更新名片预览
+ * 3. 实时更新名片预览（中英文同时显示）
  * 4. 导出按钮绑定
  */
 
 // ==================== 应用状态 ====================
 const AppState = {
-  selectedCompany: null,     // 当前选中的公司对象
+  selectedCompany: null,       // 当前选中的公司对象
   selectedTemplate: "classic", // 当前选中的模板ID
-  selectedLayout: "horizontal", // 当前选中的版式
-  avatarDataUrl: null,       // 头像图片的 DataURL
-  previewLang: "cn"          // 当前预览语言
+  selectedLayout: "horizontal",// 当前选中的版式
+  avatarDataUrl: null          // 头像图片的 DataURL
 };
 
 // ==================== 初始化 ====================
@@ -24,7 +23,6 @@ document.addEventListener("DOMContentLoaded", function() {
   initCompanySelect();
   initTemplateOptions();
   initLayoutOptions();
-  initPreviewTabs();
   initFormListeners();
   initAvatarUpload();
   initExportButtons();
@@ -182,36 +180,6 @@ function initLayoutOptions() {
       });
       
       console.log("[版式切换]", layout === "horizontal" ? "横版" : "竖版");
-    });
-  });
-}
-
-// ==================== 预览标签切换 ====================
-/**
- * 初始化中文/英文预览标签切换
- */
-function initPreviewTabs() {
-  const tabs = document.querySelectorAll(".preview-tab");
-  const cnPreview = document.getElementById("cardPreviewCN");
-  const enPreview = document.getElementById("cardPreviewEN");
-
-  tabs.forEach(function(tab) {
-    tab.addEventListener("click", function() {
-      const lang = this.getAttribute("data-lang");
-      
-      // 更新标签状态
-      tabs.forEach(function(t) { t.classList.remove("active"); });
-      this.classList.add("active");
-      
-      // 切换预览
-      AppState.previewLang = lang;
-      if (lang === "cn") {
-        cnPreview.classList.add("active");
-        enPreview.classList.remove("active");
-      } else {
-        enPreview.classList.add("active");
-        cnPreview.classList.remove("active");
-      }
     });
   });
 }
