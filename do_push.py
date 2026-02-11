@@ -4,7 +4,7 @@ os.chdir(r'D:\Code\card')
 
 subprocess.run(['git', 'add', '-A'])
 
-msg = '优化国内访问：替换CDN为国内源，添加本地服务器启动脚本'
+msg = '更新 README：添加公司NAS访问地址，外网部署完成'
 with open('commit_msg.txt', 'wb') as f:
     f.write(msg.encode('utf-8'))
 

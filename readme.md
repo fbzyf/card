@@ -8,11 +8,13 @@
 
 | 平台 | 网址 | 适用区域 |
 |------|------|---------|
-| **Cloudflare**（推荐）| https://card.jbdmsxzgp8.workers.dev/ | 🇨🇳 国内外均可 |
-| **Vercel** | https://card-eight-fawn.vercel.app/ | 🌍 国外为主 |
-| **GitHub Pages** | https://fbzyf.github.io/card/ | 🌍 国外为主 |
+| **公司NAS**（推荐）| http://linpo.familyds.net:8080/card/ | 🇨🇳 国内随时可用 |
+| **公司内网** | http://192.168.90.24/card/ | 🏢 公司网络内 |
+| **Cloudflare** | https://card.jbdmsxzgp8.workers.dev/ | 🌍 备用 |
+| **Vercel** | https://card-eight-fawn.vercel.app/ | 🌍 备用 |
+| **GitHub Pages** | https://fbzyf.github.io/card/ | 🌍 备用 |
 
-> 💡 **国内同事请使用 Cloudflare 的链接**
+> 💡 **推荐使用公司NAS链接，国内访问速度最快最稳定**
 
 ---
 
@@ -20,7 +22,7 @@
 
 ### 员工使用方法
 
-1. 打开网页（上面表格中的 Cloudflare 网址）
+1. 打开网页：**http://linpo.familyds.net:8080/card/**
 2. **选择公司** → 从下拉列表选择你所在的公司
 3. **选择版式** → 横版或竖版
 4. **选择模板** → 5种精美模板任你选
