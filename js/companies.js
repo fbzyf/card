@@ -28,7 +28,7 @@ const COMPANIES = [
     logo: "assets/logos/lujingfeng.svg",
     addressCN: "上海市徐汇区华泾路505号",
     addressEN: "505 Huajing Road, Xuhui District, Shanghai",
-    website: "www.ljfeng.com",
+    website: "www.lpfbao.com",
     phone: "",
     primaryColor: "#1a73e8"
   },
@@ -39,7 +39,7 @@ const COMPANIES = [
     logo: "assets/logos/socam.svg",
     addressCN: "RM06,13A/F SOUTH TOWER WORLD FINANCE CTR HARBOUR CITY 17 CANTON RD TST KLN HONG KONG",
     addressEN: "RM06,13A/F SOUTH TOWER WORLD FINANCE CTR HARBOUR CITY 17 CANTON RD TST KLN HONG KONG",
-    website: "www.socam-hk.com",
+    website: "www.socam.site",
     phone: "",
     primaryColor: "#2d3748"
   },
@@ -50,7 +50,7 @@ const COMPANIES = [
     logo: "assets/logos/dbh.svg",
     addressCN: "上海市徐汇区虹梅南路2007号1幢1层105室",
     addressEN: "Room 105, 1st Floor, Building 1, No. 2007 Hongmei South Road, Xuhui District, Shanghai",
-    website: "www.dbh-tech.com",
+    website: "www.sstarvast.com",
     phone: "",
     primaryColor: "#0077b6"
   },
