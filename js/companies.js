@@ -28,7 +28,7 @@ const COMPANIES = [
     logo: "assets/logos/lujingfeng.svg",
     addressCN: "上海市徐汇区华泾路505号",
     addressEN: "505 Huajing Road, Xuhui District, Shanghai",
-    website: "",
+    website: "www.ljfeng.com",
     phone: "",
     primaryColor: "#1a73e8"
   },
@@ -39,7 +39,7 @@ const COMPANIES = [
     logo: "assets/logos/socam.svg",
     addressCN: "RM06,13A/F SOUTH TOWER WORLD FINANCE CTR HARBOUR CITY 17 CANTON RD TST KLN HONG KONG",
     addressEN: "RM06,13A/F SOUTH TOWER WORLD FINANCE CTR HARBOUR CITY 17 CANTON RD TST KLN HONG KONG",
-    website: "",
+    website: "www.socam-hk.com",
     phone: "",
     primaryColor: "#2d3748"
   },
@@ -50,7 +50,7 @@ const COMPANIES = [
     logo: "assets/logos/dbh.svg",
     addressCN: "上海市徐汇区虹梅南路2007号1幢1层105室",
     addressEN: "Room 105, 1st Floor, Building 1, No. 2007 Hongmei South Road, Xuhui District, Shanghai",
-    website: "",
+    website: "www.dbh-tech.com",
     phone: "",
     primaryColor: "#0077b6"
   },
@@ -61,7 +61,7 @@ const COMPANIES = [
     logo: "assets/logos/shunyu.svg",
     addressCN: "上海市闵行区合川路3051号9幢102室",
     addressEN: "Room 102, Building 9, No. 3051 Hechuan Road, Minhang District, Shanghai",
-    website: "",
+    website: "www.hengpingyt.com",
     phone: "",
     primaryColor: "#2d6a4f"
   },
@@ -72,7 +72,7 @@ const COMPANIES = [
     logo: "assets/logos/hokuriku.svg",
     addressCN: "香港九龙湾常悦道19号福康工业大厦9楼905室",
     addressEN: "FLAT/RM 905 9/F FOOK HONG INDUSTRIAL BUILDING 19 SHEUNG YUET ROAD KOWLOON BAY",
-    website: "",
+    website: "www.hokuriku-hk.com",
     phone: "",
     primaryColor: "#c53030"
   },
@@ -83,7 +83,7 @@ const COMPANIES = [
     logo: "assets/logos/jinglu.svg",
     addressCN: "上海市徐汇区虹漕路25-1号2楼",
     addressEN: "2nd Floor, No. 25-1 Hongcao Road, Xuhui District, Shanghai",
-    website: "",
+    website: "www.hokuriku-cn.com",
     phone: "",
     primaryColor: "#4f46e5"
   }
