@@ -23,7 +23,7 @@
 const COMPANIES = [
   {
     id: "lujingfeng",
-    nameCN: "上海陆精丰电子有限公司",
+    nameCN: "上海陆精丰电子科技有限公司",
     nameEN: "Linpo Precision (Shanghai) Limited",
     logo: "assets/logos/lujingfeng.png",
     addressCN: "上海市徐汇区华泾路505号",
