@@ -24,7 +24,7 @@ const COMPANIES = [
   {
     id: "lujingfeng",
     nameCN: "上海陆精丰电子有限公司",
-    nameEN: "Shanghai Lujingfeng Electronic Technology Co., Ltd.",
+    nameEN: "Linpo Precision (Shanghai) Limited",
     logo: "assets/logos/lujingfeng.png",
     addressCN: "上海市徐汇区华泾路505号",
     addressEN: "505 Huajing Road, Xuhui District, Shanghai",
@@ -46,7 +46,7 @@ const COMPANIES = [
   {
     id: "dbh",
     nameCN: "上海星展瀚电子信息科技有限公司",
-    nameEN: "Shanghai DBH Electronic Information Technology Co., Ltd",
+    nameEN: "Shanghai StarVast Electronic Information Technology Co., Ltd.",
     logo: "assets/logos/dbh.png",
     addressCN: "上海市徐汇区虹梅南路2007号1幢1层105室",
     addressEN: "Room 105, 1st Floor, Building 1, No. 2007 Hongmei South Road, Xuhui District, Shanghai",
@@ -57,7 +57,7 @@ const COMPANIES = [
   {
     id: "shunyu",
     nameCN: "上海舜宇恒平科学仪器有限公司",
-    nameEN: "Shanghai Shunyu Hengping Scientific Instrument Co., Ltd.",
+    nameEN: "Shanghai Sunny Hengping Scientific Instrument Co., Ltd.",
     logo: "assets/logos/shunyu.png",
     addressCN: "上海市闵行区合川路3051号9幢102室",
     addressEN: "Room 102, Building 9, No. 3051 Hechuan Road, Minhang District, Shanghai",
@@ -68,7 +68,7 @@ const COMPANIES = [
   {
     id: "hokuriku",
     nameCN: "北陆电子香港有限公司",
-    nameEN: "Hokuriku Hong Kong Ltd",
+    nameEN: "HOKURIKU HONG KONG LTD",
     logo: "assets/logos/hokuriku.png",
     addressCN: "香港九龙湾常悦道19号福康工业大厦9楼905室",
     addressEN: "FLAT/RM 905 9/F FOOK HONG INDUSTRIAL BUILDING 19 SHEUNG YUET ROAD KOWLOON BAY",
