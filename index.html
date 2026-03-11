@@ -12,6 +12,9 @@
   <!-- html2canvas - 用于导出名片为图片 -->
   <script src="https://cdn.bootcdn.net/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
   
+  <!-- qrcodejs - 用于生成二维码 -->
+  <script src="https://cdn.bootcdn.net/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script>
+  
   <!-- 样式文件 -->
   <link rel="stylesheet" href="css/style.css">
 </head>
@@ -157,6 +160,10 @@
             <label for="telephone">座机电话</label>
             <input type="tel" id="telephone" placeholder="010-88888888">
           </div>
+          <div class="form-field form-field-full">
+            <label for="qrcodeUrl">二维码内容 <span class="field-hint">（可选，建议填官网链接；也可以直接填微信号）</span></label>
+            <input type="text" id="qrcodeUrl" placeholder="示例1：官网链接 https://www.example.com；示例2：微信号 zhangsan_wx">
+          </div>
         </div>
 
         <!-- 头像上传 -->
@@ -189,6 +196,7 @@
           <div class="showcase-card-wrap">
             <div id="cardPreviewCN" class="card-preview-container active">
               <div id="cardCN" class="business-card horizontal">
+                <div class="card-qr hidden" id="cardQRCN"><img src="" alt="二维码"></div>
                 <div class="card-content">
                   <div class="card-logo-area">
                     <div class="card-logo" id="cardLogoCN">
@@ -247,6 +255,7 @@
           <div class="showcase-card-wrap">
             <div id="cardPreviewEN" class="card-preview-container active">
               <div id="cardEN" class="business-card horizontal">
+                <div class="card-qr hidden" id="cardQREN"><img src="" alt="QR Code"></div>
                 <div class="card-content">
                   <div class="card-logo-area">
                     <div class="card-logo" id="cardLogoEN">
@@ -340,6 +349,15 @@
       </div>
     </div>
   </div>
+
+  <!-- ==================== Toast 成功提示 ==================== -->
+  <div id="toastNotification" class="toast-notification">
+    <span class="toast-icon">✅</span>
+    <span id="toastMessage">操作成功</span>
+  </div>
+
+  <!-- ==================== 隐藏的二维码生成器（不显示在页面上） ==================== -->
+  <div id="qrGenContainer" style="display:none; position:absolute; left:-9999px;"></div>
 
   <!-- ==================== 导出加载 ==================== -->
   <div id="exportLoading" class="export-loading hidden">

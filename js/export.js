@@ -54,9 +54,17 @@ const CardExporter = {
       document.body.removeChild(link);
 
       console.log(`[导出成功] ${fileName}.png`);
+      // 导出成功时显示 Toast 提示
+      if (typeof showToast === "function") {
+        showToast("✅  " + fileName + ".png  已保存");
+      }
     } catch (error) {
       console.error("[导出错误]", error);
-      alert("导出失败，请检查网络连接后重试。\n错误信息：" + error.message);
+      if (typeof showToast === "function") {
+        showToast("❌  导出失败，请重试", 3500);
+      } else {
+        alert("导出失败，请检查网络连接后重试。\n错误信息：" + error.message);
+      }
     } finally {
       // 隐藏加载提示
       this.showLoading(false);

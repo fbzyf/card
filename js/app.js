@@ -10,8 +10,12 @@ const AppState = {
   selectedCompany: null,
   selectedTemplate: "classic",
   selectedLayout: "horizontal",
-  avatarDataUrl: null
+  avatarDataUrl: null,
+  qrDataUrl: null          // 二维码图片 data URL
 };
+
+// ==================== 本地存储 KEY ====================
+const STORAGE_KEY = "cardMakerFormData_v1";
 
 // ==================== 初始化 ====================
 document.addEventListener("DOMContentLoaded", function() {
@@ -24,6 +28,7 @@ document.addEventListener("DOMContentLoaded", function() {
   initAvatarUpload();
   initExportButtons();
   applyTemplate(AppState.selectedTemplate);
+  restoreFormFromStorage();   // 从本地存储恢复上次填写的内容
   
   console.log("[Card Maker] 初始化完成 ✓");
 });
@@ -59,6 +64,7 @@ function initCompanySelect() {
       document.getElementById("companyDisplayWebsite").textContent = company.website;
       companyInfoEl.classList.remove("hidden");
       updateCardPreview();
+      saveFormToStorage();
       console.log("[公司选择]", company.nameCN);
     }
   });
@@ -73,7 +79,7 @@ function initTemplateOptions() {
     div.className = "template-option" + (index === 0 ? " active" : "");
     div.setAttribute("data-template", template.id);
 
-    // 颜色预览块
+    // 颜色预览块（模拟迷你名片效果）
     const colorBlock = document.createElement("div");
     colorBlock.className = "template-color-block";
     
@@ -93,6 +99,14 @@ function initTemplateOptions() {
       }
     }
 
+    // 在色块内加入模拟的文字线条，让缩略图更像一张名片
+    colorBlock.style.color = template.colors.textPrimary;
+    ["tmpl-line tmpl-line-name", "tmpl-line tmpl-line-short", "tmpl-line tmpl-line-contact"].forEach(function(cls) {
+      var line = document.createElement("div");
+      line.className = cls;
+      colorBlock.appendChild(line);
+    });
+
     const nameSpan = document.createElement("div");
     nameSpan.className = "template-name";
     nameSpan.textContent = template.nameCN;
@@ -108,6 +122,7 @@ function initTemplateOptions() {
       div.classList.add("active");
       AppState.selectedTemplate = template.id;
       applyTemplate(template.id);
+      saveFormToStorage();
       console.log("[模板切换]", template.nameCN);
     });
   });
@@ -139,7 +154,8 @@ function initLayoutOptions() {
         card.classList.remove("horizontal", "vertical");
         card.classList.add(layout);
       });
-      
+
+      saveFormToStorage();
       console.log("[版式切换]", layout === "horizontal" ? "横版" : "竖版");
     });
   });
@@ -175,6 +191,7 @@ function initFormListeners() {
     if (el) {
       el.addEventListener("input", function() {
         updateCardPreview();
+        saveFormToStorage();
       });
     }
   });
@@ -201,6 +218,18 @@ function initFormListeners() {
         console.log("[自动翻译] 部门:", val, "→", PRESET_DEPTS[val]);
       }
     });
+  }
+
+  // 二维码链接 → 实时生成二维码并更新名片
+  var qrcodeEl = document.getElementById("qrcodeUrl");
+  if (qrcodeEl) {
+    qrcodeEl.addEventListener("input", debounce(function() {
+      var url = this.value.trim();
+      AppState.qrDataUrl = generateQRDataUrl(url);
+      updateCardPreview();
+      saveFormToStorage();
+      console.log("[二维码]", url ? "已生成" : "已清除");
+    }, 400));
   }
 }
 
@@ -454,6 +483,25 @@ function updateCardPreview() {
     telephone: document.getElementById("telephone").value.trim()
   };
 
+  // 英文名片手机号：去掉横线空格后加 +86 前缀（更规范）
+  var mobileForEN = data.mobile
+    ? "+86 " + data.mobile.replace(/[-\s]/g, "")
+    : "Mobile Number";
+
+  updateSingleCard("EN", {
+    companyName: company ? company.nameEN : "Company Name",
+    name: data.nameEN, title: data.titleEN, dept: data.deptEN,
+    mobile: mobileForEN,
+    email: data.email || "Email Address",
+    wechat: data.wechat, telephone: data.telephone,
+    website: company ? company.website : "",
+    address: company ? company.addressEN : "Company Address",
+    logo: company ? company.logo : "",
+    avatar: AppState.avatarDataUrl,
+    qr: AppState.qrDataUrl
+  });
+
+  // 中文名片也同步传入二维码
   updateSingleCard("CN", {
     companyName: company ? company.nameCN : "公司名称",
     name: data.nameCN, title: data.titleCN, dept: data.deptCN,
@@ -462,19 +510,8 @@ function updateCardPreview() {
     website: company ? company.website : "",
     address: company ? company.addressCN : "公司地址",
     logo: company ? company.logo : "",
-    avatar: AppState.avatarDataUrl
-  });
-
-  updateSingleCard("EN", {
-    companyName: company ? company.nameEN : "Company Name",
-    name: data.nameEN, title: data.titleEN, dept: data.deptEN,
-    mobile: data.mobile ? "+86 " + data.mobile : "Mobile Number",
-    email: data.email || "Email Address",
-    wechat: data.wechat, telephone: data.telephone,
-    website: company ? company.website : "",
-    address: company ? company.addressEN : "Company Address",
-    logo: company ? company.logo : "",
-    avatar: AppState.avatarDataUrl
+    avatar: AppState.avatarDataUrl,
+    qr: AppState.qrDataUrl
   });
 }
 
@@ -525,6 +562,18 @@ function updateSingleCard(lang, data) {
       el.classList.remove("show");
     }
   }
+
+  // 二维码
+  var qrEl = document.getElementById("cardQR" + lang);
+  if (qrEl) {
+    var qrImg = qrEl.querySelector("img");
+    if (data.qr && qrImg) {
+      qrImg.src = data.qr;
+      qrEl.classList.remove("hidden");
+    } else {
+      qrEl.classList.add("hidden");
+    }
+  }
 }
 
 /** 控制可选字段的显示/隐藏 */
@@ -539,4 +588,143 @@ function toggleOptionalField(rowId, textId, value) {
       row.classList.add("hidden");
     }
   }
+}
+
+// ==================== 本地存储：保存表单 ====================
+function saveFormToStorage() {
+  try {
+    var data = {
+      companyId:  document.getElementById("companySelect").value,
+      nameCN:     document.getElementById("nameCN").value,
+      nameEN:     document.getElementById("nameEN").value,
+      titleCN:    document.getElementById("titleCN").value,
+      titleEN:    document.getElementById("titleEN").value,
+      deptCN:     document.getElementById("deptCN").value,
+      deptEN:     document.getElementById("deptEN").value,
+      mobile:     document.getElementById("mobile").value,
+      email:      document.getElementById("email").value,
+      wechat:     document.getElementById("wechat").value,
+      telephone:  document.getElementById("telephone").value,
+      qrcodeUrl:  document.getElementById("qrcodeUrl").value,
+      layout:     AppState.selectedLayout,
+      template:   AppState.selectedTemplate
+    };
+    localStorage.setItem(STORAGE_KEY, JSON.stringify(data));
+  } catch (e) {
+    console.warn("[本地存储] 保存失败", e);
+  }
+}
+
+// ==================== 本地存储：恢复表单 ====================
+function restoreFormFromStorage() {
+  var saved = localStorage.getItem(STORAGE_KEY);
+  if (!saved) return;
+
+  try {
+    var data = JSON.parse(saved);
+
+    // 恢复文本字段
+    var textFields = ["nameCN","nameEN","titleCN","titleEN","deptCN","deptEN","mobile","email","wechat","telephone","qrcodeUrl"];
+    textFields.forEach(function(key) {
+      var el = document.getElementById(key);
+      if (el && data[key]) el.value = data[key];
+    });
+
+    // 恢复公司选择
+    if (data.companyId) {
+      var select = document.getElementById("companySelect");
+      select.value = data.companyId;
+      select.dispatchEvent(new Event("change"));
+    }
+
+    // 恢复版式
+    if (data.layout && data.layout !== AppState.selectedLayout) {
+      var chip = document.querySelector('.layout-chip[data-layout="' + data.layout + '"]');
+      if (chip) chip.click();
+    }
+
+    // 恢复模板
+    if (data.template && data.template !== AppState.selectedTemplate) {
+      var templateOption = document.querySelector('.template-option[data-template="' + data.template + '"]');
+      if (templateOption) templateOption.click();
+    }
+
+    // 恢复二维码
+    if (data.qrcodeUrl) {
+      AppState.qrDataUrl = generateQRDataUrl(data.qrcodeUrl);
+    }
+
+    updateCardPreview();
+    console.log("[本地存储] 恢复上次记录 ✓");
+  } catch (e) {
+    console.warn("[本地存储] 恢复失败", e);
+  }
+}
+
+// ==================== 二维码生成 ====================
+/**
+ * 根据文本同步生成二维码，返回 data URL 字符串
+ * @param {string} text - 要编码的内容（URL、微信号等）
+ * @returns {string|null} - PNG data URL，失败返回 null
+ */
+function generateQRDataUrl(text) {
+  if (!text) return null;
+
+  // 若 URL 不带协议头则自动补全，方便扫码后直接跳转
+  var qrText = text;
+  if (/^www\./i.test(text)) {
+    qrText = "https://" + text;
+  }
+
+  try {
+    var container = document.getElementById("qrGenContainer");
+    container.innerHTML = "";
+    new QRCode(container, {
+      text: qrText,
+      width: 120,
+      height: 120,
+      colorDark: "#000000",
+      colorLight: "#ffffff",
+      correctLevel: QRCode.CorrectLevel.M
+    });
+    var canvas = container.querySelector("canvas");
+    return canvas ? canvas.toDataURL("image/png") : null;
+  } catch (e) {
+    console.error("[二维码] 生成失败", e);
+    return null;
+  }
+}
+
+// ==================== Toast 提示 ====================
+/**
+ * 在屏幕底部显示短暂的提示信息
+ * @param {string} message - 提示文字
+ * @param {number} duration - 持续时间（毫秒），默认 2800ms
+ */
+function showToast(message, duration) {
+  duration = duration || 2800;
+  var toast = document.getElementById("toastNotification");
+  var msgEl = document.getElementById("toastMessage");
+  if (!toast || !msgEl) return;
+
+  msgEl.textContent = message;
+  toast.classList.add("show");
+
+  clearTimeout(toast._hideTimer);
+  toast._hideTimer = setTimeout(function() {
+    toast.classList.remove("show");
+  }, duration);
+}
+
+// ==================== 工具函数 ====================
+/**
+ * 防抖：在最后一次调用 delay 毫秒后才真正执行 fn
+ */
+function debounce(fn, delay) {
+  var timer = null;
+  return function() {
+    var self = this, args = arguments;
+    clearTimeout(timer);
+    timer = setTimeout(function() { fn.apply(self, args); }, delay);
+  };
 }

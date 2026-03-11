@@ -8,14 +8,15 @@
 
 | 平台 | 网址 | 适用区域 |
 |------|------|---------|
-| **公司NAS**（推荐）| http://linpo.familyds.net:8080/card/ | 🇨🇳 国内随时可用 |
+| ⭐ **主域名（推荐）** | https://namecard.store/ | 🌍 全球可用 |
+| **公司NAS**（内网备用）| http://linpo.familyds.net:8080/card/ | 🇨🇳 国内随时可用 |
 | **公司内网** | http://192.168.90.24/card/ | 🏢 公司网络内 |
-| ⭐ **自定义域名** | https://www.ia610.com/ | 🌍 全球可用 |
+| **自定义域名（WWW）** | https://www.namecard.store/ | 🌍 全球可用 |
 | **Cloudflare** | https://card.jbdmsxzgp8.workers.dev/ | 🌍 备用 |
 | **Vercel** | https://card-eight-fawn.vercel.app/ | 🌍 备用 |
 | **GitHub Pages** | https://fbzyf.github.io/card/ | 🌍 备用 |
 
-> 💡 **推荐使用公司NAS链接，国内访问速度最快最稳定**
+> 💡 **推荐优先使用主域名 `https://namecard.store/`**
 
 ---
 
@@ -23,7 +24,7 @@
 
 ### 员工使用方法
 
-1. 打开网页：**http://linpo.familyds.net:8080/card/**
+1. 打开网页：**https://namecard.store/**
 2. **选择公司** → 从下拉列表选择你所在的公司
 3. **选择版式** → 横版或竖版
 4. **选择模板** → 9种精美模板任你选
@@ -94,7 +95,8 @@
 - 推送 GitHub 后自动部署
 
 **平台四：自定义域名（GitHub Pages + 自定义域名）**
-- 网址：https://www.ia610.com/
+- 网址：https://namecard.store/
+- 备用网址：https://www.namecard.store/
 - 通过 GitHub Pages 绑定自定义域名，推送 GitHub 后自动部署
 - 域名 DNS 设置：CNAME 记录 www → fbzyf.github.io
 
@@ -119,7 +121,7 @@ card/
 ├── assets/
 │   ├── logos/          ← 公司Logo图片
 │   └── fonts/          ← 字体文件（如需要）
-├── CNAME               ← 自定义域名配置（www.ia610.com）
+├── CNAME               ← 自定义域名配置（www.namecard.store）
 └── readme.md           ← 本说明文件
 ```
 

@@ -298,10 +298,41 @@ body {
 
 .template-color-block {
   width: 100%;
-  height: 28px;
+  height: 52px;
   border-radius: 5px;
   margin-bottom: 4px;
+  position: relative;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  padding: 6px 7px;
+  gap: 3px;
 }
+
+/* 模拟名片内容的线条 */
+.template-color-block::before {
+  content: "";
+  position: absolute;
+  top: 7px;
+  left: 7px;
+  width: 18px;
+  height: 4px;
+  background: currentColor;
+  opacity: 0.55;
+  border-radius: 2px;
+}
+
+.tmpl-line {
+  height: 2px;
+  border-radius: 1px;
+  background: currentColor;
+  opacity: 0.4;
+}
+
+.tmpl-line-name   { width: 55%; opacity: 0.7; height: 3px; }
+.tmpl-line-short  { width: 35%; }
+.tmpl-line-contact { width: 70%; opacity: 0.3; }
 
 .template-option .template-name {
   font-size: 10px;
@@ -355,6 +386,17 @@ body {
 
 .form-field input::placeholder {
   color: var(--apple-gray-3);
+  font-weight: 400;
+}
+
+/* 占满整行的表单字段 */
+.form-field-full {
+  grid-column: 1 / -1;
+}
+
+.field-hint {
+  font-size: 11px;
+  color: var(--apple-gray-4);
   font-weight: 400;
 }
 
@@ -714,9 +756,21 @@ body {
 }
 
 .business-card.vertical .card-contact-list {
-  align-items: flex-start;
+  align-items: center;
   text-align: left;
-  padding: 0 4px;
+  padding: 0;
+}
+
+.business-card.vertical .card-contact-item {
+  width: 100%;
+  justify-content: flex-start;
+  padding: 0 12px;
+  box-sizing: border-box;
+}
+
+/* 竖版时为底部二维码留出空间 */
+.business-card.vertical .card-content {
+  padding-bottom: 96px;
 }
 
 .card-contact-item {
@@ -1014,6 +1068,76 @@ body {
   font-size: 15px;
   color: var(--apple-gray-5);
   font-weight: 500;
+}
+
+/* ============================================
+   Toast 成功提示
+   ============================================ */
+.toast-notification {
+  position: fixed;
+  bottom: 32px;
+  left: 50%;
+  transform: translateX(-50%) translateY(20px);
+  background: rgba(30, 30, 30, 0.92);
+  color: #fff;
+  padding: 12px 24px;
+  border-radius: 100px;
+  font-size: 15px;
+  font-weight: 500;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  box-shadow: 0 8px 32px rgba(0,0,0,0.25);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  z-index: 20000;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.3s ease, transform 0.3s cubic-bezier(0.25, 0.1, 0.25, 1);
+  white-space: nowrap;
+}
+
+.toast-notification.show {
+  opacity: 1;
+  transform: translateX(-50%) translateY(0);
+}
+
+.toast-icon {
+  font-size: 16px;
+}
+
+/* ============================================
+   名片上的二维码区域
+   ============================================ */
+.card-qr {
+  position: absolute;
+  bottom: 12px;
+  right: 12px;
+  width: 60px;
+  height: 60px;
+  background: #ffffff;
+  border-radius: 5px;
+  padding: 4px;
+  box-shadow: 0 1px 6px rgba(0, 0, 0, 0.25);
+  z-index: 10;
+}
+
+.card-qr img {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  display: block;
+  border-radius: 2px;
+}
+
+/* 竖版二维码居中置底 */
+.business-card.vertical .card-qr {
+  right: auto;
+  left: 50%;
+  transform: translateX(-50%);
+  bottom: 14px;
+  width: 68px;
+  height: 68px;
 }
 
 /* ---------- 工具类 ---------- */
