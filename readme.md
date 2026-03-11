@@ -121,7 +121,7 @@ card/
 ├── assets/
 │   ├── logos/          ← 公司Logo图片
 │   └── fonts/          ← 字体文件（如需要）
-├── CNAME               ← 自定义域名配置（www.namecard.store）
+├── CNAME               ← 自定义域名配置（namecard.store）
 └── readme.md           ← 本说明文件
 ```
 
