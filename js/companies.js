@@ -72,7 +72,7 @@ const COMPANIES = [
     logo: "assets/logos/hokuriku.png",
     addressCN: "香港九龙湾常悦道19号福康工业大厦9楼905室",
     addressEN: "FLAT/RM 905 9/F FOOK HONG INDUSTRIAL BUILDING 19 SHEUNG YUET ROAD KOWLOON BAY",
-    website: "www.hokuriku-hk.com",
+    website: "https://hdksh.com/",
     phone: "",
     primaryColor: "#c53030"
   },
