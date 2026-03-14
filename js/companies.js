@@ -83,7 +83,7 @@ const COMPANIES = [
     logo: "assets/logos/jinglu.png",
     addressCN: "上海市徐汇区虹漕路25-1号2楼",
     addressEN: "2nd Floor, No. 25-1 Hongcao Road, Xuhui District, Shanghai",
-    website: "www.hokuriku-cn.com",
+    website: "https://hdksh.com/",
     phone: "",
     primaryColor: "#4f46e5"
   }
