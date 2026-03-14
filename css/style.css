@@ -94,8 +94,8 @@ body {
    ============================================ */
 .hero {
   text-align: center;
-  padding: 56px 22px 0;
-  max-width: 680px;
+  padding: 52px 22px 10px;
+  max-width: 1100px;
   margin: 0 auto;
 }
 
@@ -115,15 +115,78 @@ body {
   line-height: 1.5;
 }
 
+.hero-steps {
+  margin: 24px auto 0;
+  display: inline-flex;
+  align-items: center;
+  gap: 12px;
+  padding: 8px;
+  background: rgba(255, 255, 255, 0.8);
+  border: 1px solid rgba(0, 0, 0, 0.06);
+  border-radius: 999px;
+  box-shadow: var(--apple-shadow);
+}
+
+.hero-step {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 7px 12px;
+  border-radius: 999px;
+  color: var(--apple-gray-4);
+}
+
+.hero-step-index {
+  width: 20px;
+  height: 20px;
+  border-radius: 50%;
+  background: var(--apple-gray-2);
+  color: var(--apple-gray-5);
+  font-size: 12px;
+  font-weight: 700;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.hero-step-text {
+  font-size: 13px;
+  font-weight: 600;
+  letter-spacing: 0.2px;
+}
+
+.hero-step-active {
+  background: rgba(0, 122, 255, 0.12);
+  color: var(--apple-blue);
+}
+
+.hero-step-active .hero-step-index {
+  background: var(--apple-blue);
+  color: #fff;
+}
+
+/* ============================================
+   工作台布局
+   ============================================ */
+.workspace-layout {
+  max-width: 1400px;
+  margin: 0 auto;
+  padding: 10px 18px 36px;
+  display: grid;
+  grid-template-columns: minmax(620px, 1fr) minmax(460px, 560px);
+  gap: 24px;
+  align-items: start;
+}
+
 /* ============================================
    编辑区域
    ============================================ */
 .editor-area {
-  padding: 40px 22px 0;
+  padding: 0;
 }
 
 .editor-inner {
-  max-width: 980px;
+  max-width: none;
   margin: 0 auto;
 }
 
@@ -140,13 +203,13 @@ body {
   background: var(--apple-white);
   border-radius: var(--apple-radius);
   padding: 28px;
-  box-shadow: var(--apple-shadow);
-  border: 0.5px solid var(--apple-card-border);
+  box-shadow: 0 4px 18px rgba(15, 23, 42, 0.05);
+  border: 1px solid rgba(15, 23, 42, 0.07);
   transition: var(--apple-transition);
 }
 
 .card-block:hover {
-  box-shadow: var(--apple-shadow-md);
+  box-shadow: 0 10px 28px rgba(15, 23, 42, 0.1);
 }
 
 .card-block-wide {
@@ -266,7 +329,7 @@ body {
   overflow: hidden;
   border: 2px solid transparent;
   background: var(--apple-gray-1);
-  padding: 6px 4px 5px;
+  padding: 8px 6px 7px;
 }
 
 .template-option:hover {
@@ -298,29 +361,42 @@ body {
 
 .template-color-block {
   width: 100%;
-  height: 52px;
-  border-radius: 5px;
-  margin-bottom: 4px;
+  height: 62px;
+  border-radius: 8px;
+  margin-bottom: 6px;
   position: relative;
   overflow: hidden;
   display: flex;
   flex-direction: column;
   justify-content: flex-end;
-  padding: 6px 7px;
+  padding: 7px 8px;
   gap: 3px;
+  border: 1px solid rgba(255, 255, 255, 0.25);
 }
 
 /* 模拟名片内容的线条 */
 .template-color-block::before {
   content: "";
   position: absolute;
-  top: 7px;
-  left: 7px;
-  width: 18px;
+  top: 9px;
+  left: 9px;
+  width: 22px;
   height: 4px;
   background: currentColor;
   opacity: 0.55;
   border-radius: 2px;
+}
+
+.template-color-block::after {
+  content: "";
+  position: absolute;
+  right: 8px;
+  bottom: 8px;
+  width: 10px;
+  height: 10px;
+  border-radius: 2px;
+  background: rgba(255, 255, 255, 0.8);
+  opacity: 0.75;
 }
 
 .tmpl-line {
@@ -392,6 +468,52 @@ body {
 /* 占满整行的表单字段 */
 .form-field-full {
   grid-column: 1 / -1;
+}
+
+/* ---------- 表单折叠分组 ---------- */
+.form-accordion-list {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.form-accordion {
+  border: 1px solid rgba(15, 23, 42, 0.08);
+  border-radius: 14px;
+  background: #fbfcff;
+  overflow: hidden;
+}
+
+.form-accordion > summary {
+  list-style: none;
+  cursor: pointer;
+  padding: 12px 16px;
+  font-size: 13px;
+  font-weight: 700;
+  color: var(--apple-gray-5);
+  background: rgba(148, 163, 184, 0.12);
+  border-bottom: 1px solid transparent;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.form-accordion > summary::after {
+  content: "▾";
+  font-size: 12px;
+  color: var(--apple-gray-4);
+}
+
+.form-accordion[open] > summary {
+  border-bottom-color: rgba(15, 23, 42, 0.08);
+}
+
+.form-accordion:not([open]) > summary::after {
+  content: "▸";
+}
+
+.form-grid-section {
+  padding: 14px 14px 16px;
 }
 
 .field-hint {
@@ -521,21 +643,30 @@ body {
 }
 
 /* ============================================
-   名片预览区域（页面底部）
+   名片预览区域（工作台右侧）
    ============================================ */
 .preview-area {
-  padding: 60px 22px 40px;
-  background: linear-gradient(180deg, var(--apple-bg) 0%, var(--apple-gray-1) 100%);
+  padding: 0;
+  background: transparent;
+  position: sticky;
+  top: 72px;
 }
 
 .preview-inner {
-  max-width: 1100px;
+  max-width: none;
   margin: 0 auto;
+  padding: 24px 20px 20px;
+  background: linear-gradient(180deg, #ffffff 0%, #f7f9fc 100%);
+  border-radius: 22px;
+  border: 1px solid rgba(15, 23, 42, 0.08);
+  box-shadow: 0 10px 30px rgba(15, 23, 42, 0.08);
   text-align: center;
+  display: flex;
+  flex-direction: column;
 }
 
 .section-title {
-  font-size: 32px;
+  font-size: 24px;
   font-weight: 700;
   letter-spacing: -0.5px;
   color: var(--apple-gray-6);
@@ -543,47 +674,51 @@ body {
 }
 
 .section-desc {
-  font-size: 17px;
+  font-size: 14px;
   color: var(--apple-gray-4);
-  margin-bottom: 40px;
+  margin-bottom: 20px;
 }
 
 /* 名片展示区 */
 .cards-showcase {
   display: flex;
-  gap: 32px;
+  gap: 14px;
   justify-content: center;
   align-items: flex-start;
-  flex-wrap: wrap;
-  margin-bottom: 48px;
+  flex-direction: column;
+  margin-bottom: 22px;
 }
 
 .showcase-item {
   display: flex;
   flex-direction: column;
   align-items: center;
-  gap: 12px;
+  gap: 8px;
+  width: 100%;
 }
 
 .showcase-label {
-  font-size: 13px;
+  font-size: 11px;
   font-weight: 600;
   color: var(--apple-gray-4);
-  letter-spacing: 0.5px;
+  letter-spacing: 0.7px;
   text-transform: uppercase;
 }
 
 .showcase-card-wrap {
   background: var(--apple-white);
-  padding: 24px;
+  padding: 12px;
   border-radius: var(--apple-radius);
-  box-shadow: var(--apple-shadow-lg);
+  border: 1px solid rgba(15, 23, 42, 0.07);
+  box-shadow: 0 5px 18px rgba(15, 23, 42, 0.08);
   transition: var(--apple-transition);
+  width: 100%;
+  overflow-x: auto;
 }
 
 .showcase-card-wrap:hover {
-  box-shadow: 0 12px 48px rgba(0, 0, 0, 0.12);
-  transform: translateY(-4px);
+  box-shadow: 0 8px 20px rgba(15, 23, 42, 0.1);
+  transform: translateY(-2px);
 }
 
 /* 导出按钮区 */
@@ -591,7 +726,15 @@ body {
   display: flex;
   flex-direction: column;
   align-items: center;
-  gap: 16px;
+  gap: 10px;
+}
+
+.export-bar-sticky {
+  position: sticky;
+  bottom: 0;
+  margin-top: 8px;
+  padding: 12px 8px 4px;
+  background: linear-gradient(180deg, rgba(247, 249, 252, 0) 0%, rgba(247, 249, 252, 0.95) 28%, rgba(247, 249, 252, 1) 100%);
 }
 
 .export-sub {
@@ -1157,6 +1300,23 @@ body {
    响应式
    ============================================ */
 @media (max-width: 980px) {
+  .workspace-layout {
+    grid-template-columns: 1fr;
+    gap: 18px;
+    padding: 8px 12px 24px;
+  }
+
+  .preview-area {
+    position: static;
+  }
+
+  .hero-steps {
+    display: flex;
+    width: 100%;
+    max-width: 520px;
+    justify-content: center;
+  }
+
   .editor-grid-top {
     grid-template-columns: 1fr;
   }
@@ -1166,8 +1326,7 @@ body {
   }
 
   .cards-showcase {
-    flex-direction: column;
-    align-items: center;
+    align-items: stretch;
   }
 }
 
@@ -1185,11 +1344,32 @@ body {
   }
 
   .editor-area {
-    padding: 24px 12px 0;
+    padding: 0;
   }
 
   .card-block {
     padding: 20px;
+  }
+
+  .hero-steps {
+    border-radius: 18px;
+    gap: 6px;
+    padding: 6px;
+  }
+
+  .hero-step {
+    gap: 6px;
+    padding: 6px 8px;
+  }
+
+  .hero-step-text {
+    font-size: 11px;
+  }
+
+  .hero-step-index {
+    width: 18px;
+    height: 18px;
+    font-size: 11px;
   }
 
   .form-grid {
@@ -1197,11 +1377,15 @@ body {
   }
 
   .preview-area {
-    padding: 36px 12px 24px;
+    padding: 0;
+  }
+
+  .preview-inner {
+    padding: 16px 12px;
   }
 
   .section-title {
-    font-size: 24px;
+    font-size: 20px;
   }
 
   .showcase-card-wrap {

@@ -34,8 +34,23 @@
   <section class="hero">
     <h1 class="hero-title">制作你的专业名片</h1>
     <p class="hero-subtitle">选择模板，填写信息，一键导出高清名片图片</p>
+    <div class="hero-steps" aria-label="制作流程">
+      <div class="hero-step hero-step-active">
+        <span class="hero-step-index">1</span>
+        <span class="hero-step-text">填写信息</span>
+      </div>
+      <div class="hero-step">
+        <span class="hero-step-index">2</span>
+        <span class="hero-step-text">调整样式</span>
+      </div>
+      <div class="hero-step">
+        <span class="hero-step-index">3</span>
+        <span class="hero-step-text">导出名片</span>
+      </div>
+    </div>
   </section>
 
+  <div class="workspace-layout">
   <!-- ==================== 编辑区域 ==================== -->
   <section class="editor-area">
     <div class="editor-inner">
@@ -91,79 +106,90 @@
       <!-- 第二行：个人信息 -->
       <div class="card-block card-block-wide">
         <div class="block-label">个人信息</div>
-        <div class="form-grid">
-          <div class="form-field">
-            <label for="nameCN">中文姓名 <span class="req">*</span></label>
-            <input type="text" id="nameCN" placeholder="张三">
-          </div>
-          <div class="form-field">
-            <label for="nameEN">英文姓名 <span class="req">*</span></label>
-            <input type="text" id="nameEN" placeholder="San Zhang">
-          </div>
-          <div class="form-field">
-            <label for="titleCN">中文职位 <span class="req">*</span></label>
-            <input type="text" id="titleCN" list="titleCNList" placeholder="选择或输入职位" autocomplete="off">
-            <datalist id="titleCNList">
-              <option value="总经理">
-              <option value="副总经理">
-              <option value="销售经理">
-              <option value="市场经理">
-              <option value="产品线经理">
-            </datalist>
-          </div>
-          <div class="form-field">
-            <label for="titleEN">英文职位 <span class="req">*</span></label>
-            <input type="text" id="titleEN" list="titleENList" placeholder="选择或输入职位" autocomplete="off">
-            <datalist id="titleENList">
-              <option value="General Manager">
-              <option value="Deputy General Manager">
-              <option value="Sales Manager">
-              <option value="Marketing Manager">
-              <option value="Product Line Manager">
-            </datalist>
-          </div>
-          <div class="form-field">
-            <label for="deptCN">中文部门</label>
-            <input type="text" id="deptCN" list="deptCNList" placeholder="选择或输入部门" autocomplete="off">
-            <datalist id="deptCNList">
-              <option value="销售部">
-              <option value="市场部">
-              <option value="物流部">
-              <option value="财务部">
-              <option value="运营服务部">
-            </datalist>
-          </div>
-          <div class="form-field">
-            <label for="deptEN">英文部门</label>
-            <input type="text" id="deptEN" list="deptENList" placeholder="选择或输入部门" autocomplete="off">
-            <datalist id="deptENList">
-              <option value="Sales Department">
-              <option value="Marketing Department">
-              <option value="Logistics Department">
-              <option value="Finance Department">
-              <option value="Operations & Service Department">
-            </datalist>
-          </div>
-          <div class="form-field">
-            <label for="mobile">手机号码 <span class="req">*</span></label>
-            <input type="tel" id="mobile" placeholder="138-0000-0000">
-          </div>
-          <div class="form-field">
-            <label for="email">电子邮箱 <span class="req">*</span></label>
-            <input type="email" id="email" placeholder="zhangsan@abc.com">
-          </div>
-          <div class="form-field">
-            <label for="wechat">微信号</label>
-            <input type="text" id="wechat" placeholder="zhangsan_wx">
-          </div>
-          <div class="form-field">
-            <label for="telephone">座机电话</label>
-            <input type="tel" id="telephone" placeholder="010-88888888">
-          </div>
-          <div class="form-field form-field-full">
-            <label for="qrcodeUrl">二维码内容 <span class="field-hint">（可选，建议填官网链接；也可以直接填微信号）</span></label>
-            <input type="text" id="qrcodeUrl" placeholder="示例1：官网链接 https://www.example.com；示例2：微信号 zhangsan_wx">
-          </div>
+        <div class="form-accordion-list">
+          <details class="form-accordion" open>
+            <summary>身份信息（必填）</summary>
+            <div class="form-grid form-grid-section">
+              <div class="form-field">
+                <label for="nameCN">中文姓名 <span class="req">*</span></label>
+                <input type="text" id="nameCN" placeholder="张三">
+              </div>
+              <div class="form-field">
+                <label for="nameEN">英文姓名 <span class="req">*</span></label>
+                <input type="text" id="nameEN" placeholder="San Zhang">
+              </div>
+              <div class="form-field">
+                <label for="titleCN">中文职位 <span class="req">*</span></label>
+                <input type="text" id="titleCN" list="titleCNList" placeholder="选择或输入职位" autocomplete="off">
+                <datalist id="titleCNList">
+                  <option value="总经理">
+                  <option value="副总经理">
+                  <option value="销售经理">
+                  <option value="市场经理">
+                  <option value="产品线经理">
+                </datalist>
+              </div>
+              <div class="form-field">
+                <label for="titleEN">英文职位 <span class="req">*</span></label>
+                <input type="text" id="titleEN" list="titleENList" placeholder="选择或输入职位" autocomplete="off">
+                <datalist id="titleENList">
+                  <option value="General Manager">
+                  <option value="Deputy General Manager">
+                  <option value="Sales Manager">
+                  <option value="Marketing Manager">
+                  <option value="Product Line Manager">
+                </datalist>
+              </div>
+            </div>
+          </details>
+
+          <details class="form-accordion" open>
+            <summary>联系方式与扩展信息</summary>
+            <div class="form-grid form-grid-section">
+              <div class="form-field">
+                <label for="deptCN">中文部门</label>
+                <input type="text" id="deptCN" list="deptCNList" placeholder="选择或输入部门" autocomplete="off">
+                <datalist id="deptCNList">
+                  <option value="销售部">
+                  <option value="市场部">
+                  <option value="物流部">
+                  <option value="财务部">
+                  <option value="运营服务部">
+                </datalist>
+              </div>
+              <div class="form-field">
+                <label for="deptEN">英文部门</label>
+                <input type="text" id="deptEN" list="deptENList" placeholder="选择或输入部门" autocomplete="off">
+                <datalist id="deptENList">
+                  <option value="Sales Department">
+                  <option value="Marketing Department">
+                  <option value="Logistics Department">
+                  <option value="Finance Department">
+                  <option value="Operations & Service Department">
+                </datalist>
+              </div>
+              <div class="form-field">
+                <label for="mobile">手机号码 <span class="req">*</span></label>
+                <input type="tel" id="mobile" placeholder="138-0000-0000">
+              </div>
+              <div class="form-field">
+                <label for="email">电子邮箱 <span class="req">*</span></label>
+                <input type="email" id="email" placeholder="zhangsan@abc.com">
+              </div>
+              <div class="form-field">
+                <label for="wechat">微信号</label>
+                <input type="text" id="wechat" placeholder="zhangsan_wx">
+              </div>
+              <div class="form-field">
+                <label for="telephone">座机电话</label>
+                <input type="tel" id="telephone" placeholder="010-88888888">
+              </div>
+              <div class="form-field form-field-full">
+                <label for="qrcodeUrl">二维码内容 <span class="field-hint">（可选，建议填官网链接；也可以直接填微信号）</span></label>
+                <input type="text" id="qrcodeUrl" placeholder="示例1：官网链接 https://www.example.com；示例2：微信号 zhangsan_wx">
+              </div>
+            </div>
+          </details>
         </div>
 
         <!-- 头像上传 -->
@@ -183,11 +209,11 @@
     </div>
   </section>
 
-  <!-- ==================== 名片预览区域（页面底部） ==================== -->
+  <!-- ==================== 名片预览区域（工作台右侧） ==================== -->
   <section class="preview-area">
     <div class="preview-inner">
       <h2 class="section-title">名片预览</h2>
-      <p class="section-desc">填写信息后实时更新，所见即所得</p>
+      <p class="section-desc">实时预览，确认无误后直接导出</p>
 
       <div class="cards-showcase">
         <!-- 中文名片 -->
@@ -310,7 +336,7 @@
       </div>
 
       <!-- 导出按钮 -->
-      <div class="export-bar">
+      <div class="export-bar export-bar-sticky">
         <button type="button" id="exportAll" class="apple-btn apple-btn-primary apple-btn-lg">
           一键导出全部名片
         </button>
@@ -321,6 +347,7 @@
       </div>
     </div>
   </section>
+  </div>
 
   <!-- ==================== 底部 ==================== -->
   <footer class="site-footer">
