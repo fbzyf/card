@@ -100,6 +100,18 @@
           <div id="templateOptions" class="template-grid">
             <!-- JS动态生成 -->
           </div>
+          <label class="back-pattern-toggle" for="backPatternToggle">
+            <input type="checkbox" id="backPatternToggle" checked>
+            <span class="back-pattern-toggle-text">开启名片背面装饰图案（推荐）</span>
+          </label>
+          <div class="back-pattern-style-row">
+            <label for="backPatternStyle" class="back-pattern-style-label">背面风格</label>
+            <select id="backPatternStyle" class="apple-select back-pattern-style-select">
+              <option value="grid">简约线条</option>
+              <option value="orbit">科技光环</option>
+              <option value="wave">品牌波纹</option>
+            </select>
+          </div>
         </div>
       </div>
 
@@ -222,6 +234,7 @@
           <div class="showcase-card-wrap">
             <div id="cardPreviewCN" class="card-preview-container active">
               <div id="cardCN" class="business-card horizontal">
+                <div class="card-back-pattern" aria-hidden="true"></div>
                 <div class="card-qr hidden" id="cardQRCN"><img src="" alt="二维码"></div>
                 <div class="card-content">
                   <div class="card-logo-area">
@@ -281,6 +294,7 @@
           <div class="showcase-card-wrap">
             <div id="cardPreviewEN" class="card-preview-container active">
               <div id="cardEN" class="business-card horizontal">
+                <div class="card-back-pattern" aria-hidden="true"></div>
                 <div class="card-qr hidden" id="cardQREN"><img src="" alt="QR Code"></div>
                 <div class="card-content">
                   <div class="card-logo-area">

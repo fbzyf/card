@@ -11,7 +11,9 @@ const AppState = {
   selectedTemplate: "classic",
   selectedLayout: "horizontal",
   avatarDataUrl: null,
-  qrDataUrl: null          // 二维码图片 data URL
+  qrDataUrl: null,         // 二维码图片 data URL
+  backPatternEnabled: true, // 名片背面装饰图案开关
+  backPatternStyle: "grid"  // 背面装饰风格
 };
 
 // ==================== 本地存储 KEY ====================
@@ -25,6 +27,7 @@ document.addEventListener("DOMContentLoaded", function() {
   initTemplateOptions();
   initLayoutOptions();
   initFormListeners();
+  initBackPatternToggle();
   initAvatarUpload();
   initExportButtons();
   applyTemplate(AppState.selectedTemplate);
@@ -158,6 +161,48 @@ function initLayoutOptions() {
       saveFormToStorage();
       console.log("[版式切换]", layout === "horizontal" ? "横版" : "竖版");
     });
+  });
+}
+
+// ==================== 背面装饰图案开关 ====================
+function initBackPatternToggle() {
+  var toggle = document.getElementById("backPatternToggle");
+  if (!toggle) return;
+
+  toggle.addEventListener("change", function() {
+    AppState.backPatternEnabled = !!this.checked;
+    applyBackPatternState();
+    saveFormToStorage();
+    console.log("[背面装饰图案]", AppState.backPatternEnabled ? "开启" : "关闭");
+  });
+
+  var styleSelect = document.getElementById("backPatternStyle");
+  if (styleSelect) {
+    styleSelect.value = AppState.backPatternStyle;
+    styleSelect.addEventListener("change", function() {
+      AppState.backPatternStyle = this.value;
+      applyBackPatternStyle();
+      saveFormToStorage();
+      console.log("[背面装饰风格]", AppState.backPatternStyle);
+    });
+  }
+
+  applyBackPatternState();
+  applyBackPatternStyle();
+}
+
+function applyBackPatternState() {
+  var cards = document.querySelectorAll(".business-card");
+  cards.forEach(function(card) {
+    card.classList.toggle("pattern-disabled", !AppState.backPatternEnabled);
+  });
+}
+
+function applyBackPatternStyle() {
+  var cards = document.querySelectorAll(".business-card");
+  cards.forEach(function(card) {
+    card.classList.remove("pattern-style-grid", "pattern-style-orbit", "pattern-style-wave");
+    card.classList.add("pattern-style-" + AppState.backPatternStyle);
   });
 }
 
@@ -607,7 +652,9 @@ function saveFormToStorage() {
       telephone:  document.getElementById("telephone").value,
       qrcodeUrl:  document.getElementById("qrcodeUrl").value,
       layout:     AppState.selectedLayout,
-      template:   AppState.selectedTemplate
+      template:   AppState.selectedTemplate,
+      backPatternEnabled: AppState.backPatternEnabled,
+      backPatternStyle: AppState.backPatternStyle
     };
     localStorage.setItem(STORAGE_KEY, JSON.stringify(data));
   } catch (e) {
@@ -647,6 +694,26 @@ function restoreFormFromStorage() {
     if (data.template && data.template !== AppState.selectedTemplate) {
       var templateOption = document.querySelector('.template-option[data-template="' + data.template + '"]');
       if (templateOption) templateOption.click();
+    }
+
+    // 恢复背面装饰图案开关
+    if (typeof data.backPatternEnabled === "boolean") {
+      AppState.backPatternEnabled = data.backPatternEnabled;
+      var toggle = document.getElementById("backPatternToggle");
+      if (toggle) {
+        toggle.checked = AppState.backPatternEnabled;
+      }
+      applyBackPatternState();
+    }
+
+    // 恢复背面装饰风格
+    if (typeof data.backPatternStyle === "string") {
+      AppState.backPatternStyle = data.backPatternStyle;
+      var styleSelect = document.getElementById("backPatternStyle");
+      if (styleSelect) {
+        styleSelect.value = AppState.backPatternStyle;
+      }
+      applyBackPatternStyle();
     }
 
     // 恢复二维码
